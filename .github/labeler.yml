@@ -1,0 +1,10 @@
+backend:
+  - Backend/*
+
+frontend:
+  - Web/*
+
+infra:
+  - docker/*
+  - DB/*
+  - API/*
