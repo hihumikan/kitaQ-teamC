@@ -1,4 +1,13 @@
-import { Avatar, Box, Flex, Icon, Link, Heading } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Link,
+  Heading,
+  VStack,
+  Center,
+} from "@chakra-ui/react";
 import { MdOutlineHome, MdOutlineSettings } from "react-icons/md";
 
 const LinkItems = [
@@ -19,25 +28,34 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Flex
       bg="#FFFFFF"
-      w="134px"
       pos="fixed"
+      w="134px"
       h="full"
+      py="10"
       flexDirection="column"
       justifyContent="space-between"
+      alignItems="center"
       {...rest}
     >
-      <Heading fontSize="xl" fontFamily="monospace" fontWeight="bold">
-        おかん
-        <br />
-        おとん
-      </Heading>
-      <Box>
-        {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon} />
-        ))}
+      <Box w={"full"}>
+        <Heading
+          fontSize="xl"
+          fontFamily="monospace"
+          fontWeight="bold"
+          mb={"130px"}
+        >
+          おかん
+          <br />
+          おとん
+        </Heading>
+        <VStack spacing={"3"}>
+          {LinkItems.map((link) => (
+            <NavItem key={link.name} icon={link.icon} />
+          ))}
+        </VStack>
       </Box>
       <Avatar
-        size={"sm"}
+        size="md"
         src={
           "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
         }
@@ -46,36 +64,31 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon, ...rest }) => {
+const NavItem = ({ icon }) => {
   return (
     <Link
+      w="full"
+      h={"50px"}
       href="#"
       style={{ textDecoration: "none" }}
+      cursor="pointer"
       _focus={{ boxShadow: "none" }}
+      _hover={{
+        borderRight: "2px solid #F1873B",
+        pl: "2px",
+      }}
     >
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        role="group"
-        cursor="pointer"
-        flexDirection="column"
-        _hover={{
-          bg: "cyan.400",
-          color: "white",
-        }}
-        {...rest}
-      >
+      <Center h={"full"}>
         {icon && (
           <Icon
-            fontSize="30"
-            _groupHover={{
-              color: "white",
-            }}
+            fontSize="27px"
+            // _groupHover={{
+            //   color: "white",
+            // }}
             as={icon}
           />
         )}
-      </Flex>
+      </Center>
     </Link>
   );
 };
