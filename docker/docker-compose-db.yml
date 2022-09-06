@@ -1,25 +1,24 @@
 version: '3.9'
 
 services:
-  db:
-    container_name: db
-    build:
-      context: .
-      dockerfile: ../DB/Dockerfile
-    platform: linux/x86_64
-    tty: true
+  mysql:
+    container_name: kitaq_mysql
+    build: ../DB
     ports:
-      - 3306:3306
-    env_file:
-      - ../DB/.env_mysql
+      - "3306:3306"
     volumes:
-      - type: volume
-        source: mysql-data
-        target: /var/lib/mysql
-      - type: bind
-        source: ../DB/init
-        target: /docker-entrypoint-initdb.d
+      - ../DB/init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    platform: linux/x86_64
 
 volumes:
   mysql-data:
     name: kitaq-volume
+
+networks:
+  kitaq_network:
+    external: true

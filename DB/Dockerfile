@@ -1,2 +1,9 @@
 FROM mysql:latest
-ENV LANG ja_JP.UTF-8
+
+ADD ./my.cnf /etc/mysql/conf.d/my.cnf
+ADD ./hosts /etc/hosts
+
+RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
+    chmod 644 /etc/mysql/conf.d/my.cnf
+EXPOSE 3306
+CMD ["mysqld"]
