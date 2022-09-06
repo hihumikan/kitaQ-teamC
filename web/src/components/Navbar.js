@@ -19,7 +19,9 @@ export default function Navbar({ children }) {
   return (
     <Box minH="100vh" bg="#F8F8F8">
       <SidebarContent />
-      <Box ml="134px">{children}</Box>
+      <Box ml="134px" p={"10"}>
+        {children}
+      </Box>
     </Box>
   );
 }
