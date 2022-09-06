@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
   version: 1.0.0
-  title: Leafony API
+  title: KitaQ API
   description: >-
-    Leafony API is a RESTful API for managing Leafony.
+    KitaQ API is a RESTful API for managing KitaQ.
 servers:
   - url: 'http://localhost:8003'
 paths:
