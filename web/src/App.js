@@ -1,15 +1,15 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Timeline from "./pages/Timeline";
+import "./App.css"
+import Navbar from "./components/Navbar"
+import HomePage from "./pages/homePage"
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
       <Navbar>
-        <Timeline />
+        <HomePage></HomePage>
       </Navbar>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
