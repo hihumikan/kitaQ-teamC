@@ -3,16 +3,16 @@ import {
   Box,
   Flex,
   Icon,
-  Link,
   Heading,
   VStack,
   Center,
 } from "@chakra-ui/react";
 import { MdOutlineHome, MdOutlineSettings } from "react-icons/md";
+import Link from "./Link";
 
 const LinkItems = [
-  { name: "Home", icon: MdOutlineHome },
-  { name: "Settings", icon: MdOutlineSettings },
+  { name: "Home", icon: MdOutlineHome, to: "/" },
+  { name: "Settings", icon: MdOutlineSettings, to: "/timeline" },
 ];
 
 export default function Navbar({ children }) {
@@ -52,7 +52,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </Heading>
         <VStack spacing={"3"}>
           {LinkItems.map((link) => (
-            <NavItem key={link.name} icon={link.icon} />
+            <NavItem key={link.name} icon={link.icon} to={link.to} />
           ))}
         </VStack>
       </Box>
@@ -66,9 +66,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const NavItem = ({ icon }) => {
+const NavItem = ({ icon, to }) => {
   return (
     <Link
+      to={to}
       w="full"
       h={"50px"}
       href="#"
