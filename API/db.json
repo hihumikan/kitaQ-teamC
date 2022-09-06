@@ -1,11 +1,4 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" },
   "users": [
     { "user_id": 1, "user_name": "ほげほげ", "description": "ユーザーの説明文","image_url": "api.kitaq.qqry.net/static/profile/1.png"},
     { "user_id": 2, "user_name": "ふがふが", "description": "ユーザーの説明文","image_url": "api.kitaq.qqry.net/static/profile/1.png"}
