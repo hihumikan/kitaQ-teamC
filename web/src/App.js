@@ -1,15 +1,12 @@
-import "./App.css"
-import Navbar from "./components/Navbar"
-import HomePage from "./pages/homePage"
+import "./App.css";
+import Navbar from "./components/Navbar";
 
-function App() {
+function App({ children }) {
   return (
-    <div className='App'>
-      <Navbar>
-        <HomePage></HomePage>
-      </Navbar>
+    <div className="App">
+      <Navbar>{children}</Navbar>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
