@@ -7,11 +7,10 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
 } from "@chakra-ui/react";
+import { MdOutlinePerson, MdLockOutline } from "react-icons/md";
+import { PrimaryButton } from "./Button";
+import MyInputGroup from "./MyInputGroup";
 
 function SignupModal({ isOpen, onClose }) {
   const initialRef = useRef(null);
@@ -22,31 +21,33 @@ function SignupModal({ isOpen, onClose }) {
       finalFocusRef={finalRef}
       isOpen={isOpen}
       onClose={onClose}
+      size="3xl"
     >
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>create account</ModalHeader>
+      <ModalContent alignItems={"center"} py={"64px"}>
+        <ModalHeader fontSize={"3xl"}>create account</ModalHeader>
         <ModalCloseButton />
-        <ModalBody pb={6}>
-          <FormControl>
-            <FormLabel>e-mail</FormLabel>
-            <Input ref={initialRef} placeholder="e-mail" />
-          </FormControl>
-
-          <FormControl mt={4}>
-            <FormLabel>password</FormLabel>
-            <Input placeholder="password" />
-          </FormControl>
+        <ModalBody py={8}>
+          <MyInputGroup
+            name={"email"}
+            icon={<MdOutlinePerson color="gray.800" />}
+            mb={9}
+          />
+          <MyInputGroup
+            name={"password"}
+            icon={<MdLockOutline color="gray.800" />}
+            mb={9}
+          />
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3}>
-            get start !
-          </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9}>
+            get started !
+          </PrimaryButton>
         </ModalFooter>
       </ModalContent>
     </Modal>
   );
 }
+
 export default SignupModal;
