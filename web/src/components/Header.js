@@ -26,6 +26,7 @@ function Header({ children }) {
       {children}
       <ButtonGroup gap={"15px"}>
         <Button
+          onClick={onOpen1}
           rounded={"full"}
           px={6}
           bg="#9B9B9B"
@@ -35,6 +36,7 @@ function Header({ children }) {
           log in
         </Button>
         <Button
+          onClick={onOpen2}
           width={"140px"}
           rounded={"full"}
           px={6}
