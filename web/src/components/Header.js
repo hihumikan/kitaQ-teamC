@@ -1,14 +1,26 @@
-import { Flex, ButtonGroup, Button } from "@chakra-ui/react";
+import { Flex, ButtonGroup, Button, Spacer, HStack } from "@chakra-ui/react";
 
 function Header({ children }) {
   return (
-    <Flex justifyContent={"space-between"} alignItems={"center"} mb={"51px"}>
+    <HStack
+      justifyContent={"space-between"}
+      spacing="720px"
+      alignItems={"center"}
+      mb={"51px"}
+    >
       {children}
-      <ButtonGroup>
-        <Button rounded={"full"} px={6} bg="#9B9B9B" color={"white"}>
+      <ButtonGroup gap={"15px"}>
+        <Button
+          rounded={"full"}
+          px={6}
+          bg="#9B9B9B"
+          color={"white"}
+          width={"140px"}
+        >
           log in
         </Button>
         <Button
+          width={"140px"}
           rounded={"full"}
           px={6}
           colorScheme={"orange"}
@@ -18,7 +30,7 @@ function Header({ children }) {
           sign up
         </Button>
       </ButtonGroup>
-    </Flex>
+    </HStack>
   );
 }
 
