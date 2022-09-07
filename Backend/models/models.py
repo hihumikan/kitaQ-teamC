@@ -22,10 +22,30 @@ class Users:
     except:
       return None
 
-  def get_user(user_id) -> list:
+  def get_user(self,user_id) -> str:
     conn = conn_db()              #ここでDBに接続
     cursor = conn.cursor()
-    sql = "SELECT * FROM users WHERE user_id = " + user_id + ";"
+    sql = "SELECT user_name FROM users WHERE id = " + str(user_id) + ";"
+    try:
+      cursor.execute(sql)
+      return cursor.fetchall()
+    except:
+      return None
+  
+  def get_user_post(self,user_id) -> list:
+    conn = conn_db()
+    cursor = conn.cursor()
+    sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE user_id = " + str(user_id) + ";"
+    try:
+      cursor.execute(sql)
+      return cursor.fetchall()
+    except:
+      return None
+
+  def get_comment_cnt(self,post_id) ->str:
+    conn = conn_db()
+    cursor = conn.cursor()
+    sql = "SELECT COUNT(comment) FROM comments WHERE id = " + str(post_id) + ";"
     try:
       cursor.execute(sql)
       return cursor.fetchall()
