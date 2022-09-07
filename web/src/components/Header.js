@@ -1,4 +1,5 @@
-import { Flex, ButtonGroup, Button, useDisclosure } from "@chakra-ui/react";
+
+import { Flex, ButtonGroup, Button,  Spacer, HStack,useDisclosure } from "@chakra-ui/react";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 
@@ -15,34 +16,39 @@ function Header({ children }) {
   } = useDisclosure();
 
   return (
-    <>
-      <Flex justifyContent={"space-between"} alignItems={"center"} mb={"51px"}>
-        {children}
-        <ButtonGroup>
-          <Button
-            onClick={onOpen1}
-            rounded={"full"}
-            px={6}
-            bg="#9B9B9B"
-            color={"white"}
-          >
-            log in
-          </Button>
-          <Button
-            onClick={onOpen2}
-            rounded={"full"}
-            px={6}
-            colorScheme={"orange"}
-            bg={"#F1873B"}
-            _hover={{ bg: "orange.500" }}
-          >
-            sign up
-          </Button>
-        </ButtonGroup>
-      </Flex>
-      <LoginModal isOpen={isOpen1} onClose={onClose1} />
-      <SignupModal isOpen={isOpen2} onClose={onClose2} />
-    </>
+   <>
+    <HStack
+      justifyContent={"space-between"}
+      spacing="720px"
+      alignItems={"center"}
+      mb={"51px"}
+    >
+      {children}
+      <ButtonGroup gap={"15px"}>
+        <Button
+          rounded={"full"}
+          px={6}
+          bg="#9B9B9B"
+          color={"white"}
+          width={"140px"}
+        >
+          log in
+        </Button>
+        <Button
+          width={"140px"}
+          rounded={"full"}
+          px={6}
+          colorScheme={"orange"}
+          bg={"#F1873B"}
+          _hover={{ bg: "orange.500" }}
+        >
+          sign up
+        </Button>
+      </ButtonGroup>
+    </HStack>
+    <LoginModal isOpen={isOpen1} onClose={onClose1} />
+    <SignupModal isOpen={isOpen2} onClose={onClose2} />
+   </>   
   );
 }
 
