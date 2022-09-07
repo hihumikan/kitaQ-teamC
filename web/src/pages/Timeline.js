@@ -10,6 +10,7 @@ import Header from "../components/Header";
 import Post from "../components/Post";
 import { BiPlus } from "react-icons/bi";
 import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
 
 const PostItems = [
   {
@@ -96,7 +97,12 @@ function Timeline() {
         </Button>
         <VStack spacing={"75px"}>
           {PostItems.map((post) => (
-            <Post key={post.id} post={post} />
+              <Link
+              _hover={{ textDecoration: "none", boxShadow: "sm", opacity: "0.95" }}
+              to={`/onePostPage/${post.id}`}
+            >
+              <Post key={post.id} post={post} />
+            </Link>
           ))}
         </VStack>
       </div>
