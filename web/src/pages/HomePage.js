@@ -35,7 +35,6 @@ export default function HomePage() {
       </Header>
       <SimpleGrid
         columns={3}
-        bgColor="#F8F8F8"
         spacing={10}
         columnGap={2}
         px={20}

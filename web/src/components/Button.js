@@ -10,6 +10,7 @@ function PrimaryButton({ size, children, ...rest }) {
       color={"white"}
       bg="#F1873B"
       _hover={{ bg: "#EE6D11" }}
+      _active={{ bg: "#EE6D11" }}
       {...rest}
     >
       {children}
@@ -27,6 +28,7 @@ function SecondaryButton({ size, children, ...rest }) {
       color={"white"}
       bg="#9B9B9B"
       _hover={{ bg: "#808080" }}
+      _active={{ bg: "#808080" }}
       {...rest}
     >
       {children}
