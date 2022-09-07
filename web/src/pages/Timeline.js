@@ -1,9 +1,9 @@
-import { Avatar, Center, VStack, Heading, Button ,Link} from "@chakra-ui/react"
+import { Avatar, Center, VStack, Heading, Button } from "@chakra-ui/react"
 import Header from "../components/Header"
 import Post from "../components/Post"
 import { BiPlus } from "react-icons/bi"
 import { IconContext } from "react-icons"
-import {  useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 const PostItems = [
   {
