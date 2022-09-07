@@ -1,9 +1,9 @@
-import { Avatar, Center, VStack, Heading, Button } from "@chakra-ui/react";
-import Header from "../components/Header";
-import Post from "../components/Post";
-import { BiPlus } from "react-icons/bi";
-import { IconContext } from "react-icons";
-import { Link } from "react-router-dom";
+import { Avatar, Center, VStack, Heading, Button ,Link} from "@chakra-ui/react"
+import Header from "../components/Header"
+import Post from "../components/Post"
+import { BiPlus } from "react-icons/bi"
+import { IconContext } from "react-icons"
+import {  useParams } from "react-router-dom"
 
 const PostItems = [
   {
@@ -27,15 +27,17 @@ const PostItems = [
     created_at: "2021-05-01T00:00:00.000Z",
     updated_at: "2021-05-01T00:00:00.000Z",
   },
-];
+]
 function Timeline() {
+  // paramのidはuser_idです！
+  const { uid } = useParams()
   return (
     <>
       <div style={{ position: "fixed" }}>
         <Header>
           <Center>
             <Avatar
-              size="md"
+              size='md'
               mr={"16px"}
               src={
                 "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
@@ -48,9 +50,9 @@ function Timeline() {
       <div>
         <Button
           color={"black"}
-          bg="white"
-          height="170px"
-          width="170px"
+          bg='white'
+          height='170px'
+          width='170px'
           borderRadius={"60px"}
           position={"fixed"}
           marginLeft={"400px"}
@@ -67,7 +69,7 @@ function Timeline() {
             <Link
               _hover={{
                 textDecoration: "none",
-                boxShadow: "sm",
+                boxShadow: "lg",
                 opacity: "0.95",
               }}
               to={`/onePostPage/${post.id}`}
@@ -78,6 +80,6 @@ function Timeline() {
         </VStack>
       </div>
     </>
-  );
+  )
 }
-export default Timeline;
+export default Timeline
