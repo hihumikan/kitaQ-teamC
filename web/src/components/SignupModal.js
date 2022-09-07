@@ -46,6 +46,7 @@ function SignupModal({ isOpen, onClose }) {
         <ModalBody py={8}>
           <HStack>
             <Center
+              _hover={{ boxShadow: "lg" }}
               w={"250px"}
               h='180px'
               border={"4px"}
@@ -62,6 +63,7 @@ function SignupModal({ isOpen, onClose }) {
             </Center>
             <Spacer></Spacer>
             <Center
+              _hover={{ boxShadow: "lg" }}
               w={"250px"}
               h='180px'
               border={"4px"}
