@@ -33,13 +33,7 @@ export default function HomePage() {
       <Header>
         <Heading>HOME</Heading>
       </Header>
-      <SimpleGrid
-        columns={3}
-        spacing={10}
-        columnGap={2}
-        px={20}
-        py={10}
-      >
+      <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
         {testPosts.map((m, i) => {
           return <PostCard key={i} name={m.name} description={m.description} />;
         })}
