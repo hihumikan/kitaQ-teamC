@@ -1,4 +1,3 @@
-from email.errors import InvalidMultipartContentTransferEncodingDefect
 from flask import Blueprint, request, make_response
 from models.models import Users, Commons
 import os
@@ -13,9 +12,9 @@ def get_all_users():
     data = db.get_all_users()
     result = []
     for user in data:
-        if os.path.isfile("static/users/" + str(user[0]) + ".jpg"):
+        if os.path.isfile("static/users/" + str(user[0]) + ".webp"):
             image = "http://api.kitaq.qqey.net/static/users/" + \
-                str(user[0]) + ".jpg"
+                str(user[0]) + ".webp"
         else:
             image = None
         result.append({
@@ -31,18 +30,20 @@ def get_all_users():
 def get_user(user_id):
     db = Users()
     user_data = db.get_user(user_id)
+    if bool(user_data) == False:
+      return {"status": "NG"},404
     posts_data = db.get_user_post(user_id)
-    result = []
+    result = {}
     posts = []
-    if os.path.isfile("static/users/" + str(user_id) + ".jpg"):
-        user_image = "http://api.kitaq.qqey.net/static/users/" + user_id + ".jpg"
+    if os.path.isfile("static/users/" + str(user_id) + ".webp"):
+        user_image = "http://api.kitaq.qqey.net/static/users/" + user_id + ".webp"
     else:
         user_image = None
 
     for post in posts_data:
-        if os.path.isfile("static/posts/" + str(post[0]) + ".jpg"):
+        if os.path.isfile("static/posts/" + str(post[0]) + ".webp"):
             post_image = "http://api.kitaq.qqey.net/static/posts/" + \
-                str(post[0]) + ".jpg"
+                str(post[0]) + ".webp"
         else:
             post_image = None
         posts.append({
@@ -54,10 +55,11 @@ def get_user(user_id):
             "comments": db.get_comment_cnt(post[0])[0][0]
         })
 
-    result.append({
-        "user_name": user_data[0],
+    result.update({
+        "user_name": user_data[0][0],
         "image_url": user_image,
-        "posts": posts
+        "posts": posts,
+        "status": "OK"
     })
     return result
 
