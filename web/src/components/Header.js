@@ -1,11 +1,5 @@
-import {
-  Flex,
-  ButtonGroup,
-  Button,
-  Spacer,
-  HStack,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { ButtonGroup, HStack, useDisclosure } from "@chakra-ui/react";
+import { PrimaryButton, SecondaryButton } from "./Button";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 
@@ -31,27 +25,8 @@ function Header({ children }) {
       >
         {children}
         <ButtonGroup gap={"15px"}>
-          <Button
-            onClick={onOpen1}
-            rounded={"full"}
-            px={6}
-            bg="#9B9B9B"
-            color={"white"}
-            width={"140px"}
-          >
-            log in
-          </Button>
-          <Button
-            onClick={onOpen2}
-            width={"140px"}
-            rounded={"full"}
-            px={6}
-            colorScheme={"orange"}
-            bg={"#F1873B"}
-            _hover={{ bg: "orange.500" }}
-          >
-            sign up
-          </Button>
+          <SecondaryButton onClick={onOpen1}>log in</SecondaryButton>
+          <PrimaryButton onClick={onOpen2}>sign up</PrimaryButton>
         </ButtonGroup>
       </HStack>
       <LoginModal isOpen={isOpen1} onClose={onClose1} />
