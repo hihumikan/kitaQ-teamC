@@ -1,5 +1,4 @@
 from flask import Flask
-import os
 from controller.users import users_bp
 
 app = Flask(__name__)
