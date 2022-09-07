@@ -12,6 +12,7 @@ export default function HomePage() {
         <Heading>HOME</Heading>
       </Header>
       <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
+
         {users.map((user) => {
           return (
             <Link to={`/timeline/${user.user_id}`}>
@@ -30,6 +31,7 @@ export default function HomePage() {
               </Box>
             </Link>
           )
+
         })}
       </SimpleGrid>
     </Box>
