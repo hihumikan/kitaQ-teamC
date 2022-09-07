@@ -6,6 +6,7 @@ import {
   Heading,
   VStack,
   Center,
+  Img,
 } from "@chakra-ui/react";
 import { MdOutlineHome, MdOutlineSettings } from "react-icons/md";
 import Link from "./Link";
@@ -33,7 +34,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       pos="fixed"
       w="134px"
       h="full"
-      py="10"
+      // py="10"
       flexDirection="column"
       justifyContent="space-between"
       alignItems="center"
@@ -46,9 +47,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
           fontWeight="bold"
           mb={"130px"}
         >
-          おかん
-          <br />
-          おとん
+          <Img src="./logo.png"/>
         </Heading>
         <VStack spacing={"3"}>
           {LinkItems.map((link) => (
