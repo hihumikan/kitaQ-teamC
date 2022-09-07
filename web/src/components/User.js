@@ -1,9 +1,9 @@
 import {
   Box,
   Center,
-  Heading,
   Avatar,
   useColorModeValue,
+  Text
 } from "@chakra-ui/react";
 
 export default function PostCard(props) {
@@ -25,9 +25,9 @@ export default function PostCard(props) {
           alt={"Avatar Alt"}
           pos={"relative"}
         />
-        <Heading fontSize={"2xl"} fontFamily={"body"} my="38">
+        <Text fontSize={"2xl"} fontFamily={"body"} my="38">
           {props.name}
-        </Heading>
+        </Text>
         <Box noOfLines={3} px="6">
           {props.description}
         </Box>

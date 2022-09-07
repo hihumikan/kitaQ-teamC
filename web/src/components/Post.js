@@ -17,7 +17,7 @@ function Post({ post }) {
           {post.created_at}
         </Text>
         <img src={post.image_url} alt={post.image_alt} />
-        <Heading size='lg'>{post.title}</Heading>
+        <Text size='lg'>{post.title}</Text>
         <Text>{post.description}</Text>
       </Flex>
       <HStack position='absolute' bottom={10} right={10}>
