@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 
 function PrimaryButton({ size, children, ...rest }) {
   return (
@@ -36,4 +36,19 @@ function SecondaryButton({ size, children, ...rest }) {
   );
 }
 
-export { PrimaryButton, SecondaryButton };
+function ModalButton({ icon, ...rest }) {
+  return (
+    <IconButton
+      w={"60px"}
+      h={"60px"}
+      fontSize="30px"
+      icon={icon}
+      bg="white"
+      shadow={"4px 4px 10px #bfbfbf"}
+      rounded={"full"}
+      {...rest}
+    />
+  );
+}
+
+export { PrimaryButton, SecondaryButton, ModalButton };
