@@ -10,7 +10,7 @@ import {
   Image,
   Spacer,
   Avatar,
-  Input
+  Input,
 } from "@chakra-ui/react"
 import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
@@ -40,10 +40,41 @@ const ChatCard = () => {
   )
 }
 
-export default function OnePostPage() {
-    // これでurlのid取ってこれます！
-  const { id } = useParams()
+const InputArea = () => {
+  return (
+    <Center
+    //   position={"absolute"}
+      w={"100%"}
+      h={"180px"}
+      bgColor={"white"}
+      bottom={0}
+      right={0}
+      zIndex={4}
+    >
+      <HStack align={"end"}>
+        <Box
+          borderRadius={"2xl"}
+          border={"1px"}
+          borderColor={"#9E9E9E"}
+          h={"100px"}
+          w={"350px"}
+          p={4}
+          mr={"10px"}
+        >
+          <Input variant='unstyled' placeholder='コメントを残す' />
+        </Box>
+        <FiSend size={"30px"} />
+      </HStack>
+    </Center>
+  )
+}
 
+export default function OnePostPage() {
+    // const isChild = false
+    const isChild = true
+    const chatListHeight =  isChild === true ? '410px' : '550px'
+  // これでurlのid取ってこれます！
+  const { id } = useParams()
 
   /// idからpostを取ってくる
   return (
@@ -76,33 +107,17 @@ export default function OnePostPage() {
           <Divider orientation='vertical' size={"20px"}></Divider>
           <Box flex={1} h={"100%"} bgColor={""}>
             <VStack position={"relative"}>
-              <Center
-                position={"absolute"}
-                w={"100%"}
-                h={"180px"}
-                bgColor={"white"}
-                bottom={0}
-                right={0}
-                zIndex={4}
-              >
-                <HStack align={'end'}>
-                  <Box borderRadius={"2xl"} border={"1px"} borderColor={'#9E9E9E'} h={"100px"} w={"350px"} p={4} mr={'10px'}>
-                   
-                  <Input variant='unstyled' placeholder='コメントを残す' />
-                  </Box>
-                  <FiSend size={'30px'}/>
-                </HStack>
-              </Center>
               <HStack p={2}>
                 <TbMessage2 size={"40px"}></TbMessage2>
                 <Text fontSize={"20px"}>message</Text>
               </HStack>
-              <VStack overflow={"auto"} h='600px' spacing={"40px"}>
+              <VStack overflow={"auto"} h={chatListHeight} spacing={"40px"}>
                 <ChatCard></ChatCard>
                 <ChatCard></ChatCard>
                 <ChatCard></ChatCard>
                 <ChatCard></ChatCard>
               </VStack>
+              {isChild === true ? <InputArea /> : <></>} 
             </VStack>
           </Box>
         </Flex>
