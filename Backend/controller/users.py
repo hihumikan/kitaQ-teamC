@@ -103,6 +103,30 @@ def user_reg():
                         max_age=max_age, path='/', secure=None, httponly=True)
     return response
 
+@users_bp.route("/login", methods=["POST"])
+def user_login():
+    db = Users()
+
+    email = request.form['email']
+    password = request.form['password']
+
+    result = db.user_login(email, password)
+    print(result)
+    user_id = result[0][0]
+    print(user_id)
+    
+    db = Commons()
+    # make_responseでレスポンスオブジェクトを生成する
+    response = make_response('login:OK')
+
+    # Cookieの設定を行う
+    max_age = 60 * 60 * 24 * 30  # 30日有効のセッションを発行
+    session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
+    print(db.cookie_reg(user_id, session_id))
+    response.set_cookie('session', value=session_id,
+                        max_age=max_age, path='/', secure=None, httponly=True)
+    return response
+
 
 @users_bp.route("/cookietest", methods=["GET"])
 def cookie_set():

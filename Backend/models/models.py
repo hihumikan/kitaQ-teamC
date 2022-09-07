@@ -66,6 +66,20 @@ class Users:
             cursor.close
             conn.close
             return False
+    
+    def user_login(self, email, password):
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "SELECT id FROM users WHERE email = '" + email + "' AND password = '" + password + "';"
+
+        print(sql)
+        try:
+            cursor.execute(sql)
+            return cursor.fetchall()
+        except:
+            cursor.close
+            conn.close
+            return False
 
     def get_all_users(self) -> list:
         conn = conn_db()  # ここでDBに接続
