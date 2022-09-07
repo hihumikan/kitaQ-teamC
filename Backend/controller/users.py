@@ -1,3 +1,4 @@
+from email.errors import InvalidMultipartContentTransferEncodingDefect
 from flask import Blueprint, request, make_response
 from models.models import Users, Commons
 import os
@@ -77,31 +78,57 @@ def user_patch():
 
 @users_bp.route("/signin", methods=["POST"])
 def user_reg():
+    data={}
+    output = {}
     db = Users()
+    try:
+      user_name = request.form['user_name']
+      email = request.form['email']
+      password = request.form['password']
+      isParent = request.form['isParent']
+      file = request.files['file']
+      description = request.form['description']
+    except:
+      return {"status": "NG"}
+    
+    try:
+      result = db.user_reg(user_name, email, password, isParent, description)
+      user_id = result[0][0]
 
-    user_name = request.form['user_name']
-    email = request.form['email']
-    password = request.form['password']
-    isParent = request.form['isParent']
-    file = request.files['file']
-    description = request.form['description']
+      file.save("static/users/" + str(user_id) + ".webp")
 
-    result = db.user_reg(user_name, email, password, isParent, description)
-    user_id = result[0][0]
+      if os.path.isfile("static/users/" + str(user_id) + ".webp"):
+            image = "http://api.kitaq.qqey.net/static/users/" + \
+                  str(user_id) + ".webp"
+      else:
+            image = None
 
-    file.save("static/users/" + str(user_id) + ".webp")
+      data.update({
+              "user_id": user_id,
+              "user_name": user_name,
+              "description": description,
+              "isParent": isParent,
+              "image_url": image
+              })
 
-    db = Commons()
-    # make_responseでレスポンスオブジェクトを生成する
-    response = make_response('signin:OK')
+      output.update({
+            "status": "OK",
+            "user_data": data
+            })
+      response = make_response(output)
 
-    # Cookieの設定を行う
-    max_age = 60 * 60 * 24 * 30  # 30日有効のセッションを発行
-    session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
-    print(db.cookie_reg(user_id, session_id))
-    response.set_cookie('session', value=session_id,
-                        max_age=max_age, path='/', secure=None, httponly=True)
-    return response
+      # Cookieの設定を行う
+      db = Commons()
+      max_age = 60 * 60 * 24 * 30  # 30日有効のセッションを発行
+      session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
+      print(db.cookie_reg(user_id, session_id))
+      response.set_cookie('session', value=session_id,
+                          max_age=max_age, path='/', secure=None, httponly=True)
+      return response
+    except:
+      response = {"status": "NG"}
+    finally:
+      return response
 
 @users_bp.route("/login", methods=["POST"])
 def user_login():
@@ -109,23 +136,55 @@ def user_login():
 
     email = request.form['email']
     password = request.form['password']
-
+    
     result = db.user_login(email, password)
     print(result)
-    user_id = result[0][0]
-    print(user_id)
-    
-    db = Commons()
-    # make_responseでレスポンスオブジェクトを生成する
-    response = make_response('login:OK')
+    try:
+      data = {}
+      output = {}
 
-    # Cookieの設定を行う
-    max_age = 60 * 60 * 24 * 30  # 30日有効のセッションを発行
-    session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
-    print(db.cookie_reg(user_id, session_id))
-    response.set_cookie('session', value=session_id,
-                        max_age=max_age, path='/', secure=None, httponly=True)
-    return response
+      user_id = result[0][0]
+      user_name = result[0][1]
+      description = result[0][2]
+      isParent = result[0][3]
+      if os.path.isfile("static/users/" + str(user_id) + ".webp"):
+          image = "http://api.kitaq.qqey.net/static/users/" + \
+                str(user_id) + ".webp"
+      else:
+          image = None
+
+      data.update({
+            "user_id": user_id,
+            "user_name": user_name,
+            "description": description,
+            "isParent": isParent,
+            "image_url": image
+            })
+
+      print(user_id)
+      print(data)
+      output.update({
+            "status": "OK",
+            "user_data": data
+            })
+
+      db = Commons()
+      # make_responseでレスポンスオブジェクトを生成する
+      response = make_response(output)
+
+      # Cookieの設定を行う
+      max_age = 60 * 60 * 24 * 30  # 30日有効のセッションを発行
+      session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
+      print(db.cookie_reg(user_id, session_id))
+      response.set_cookie('session', value=session_id,
+                          max_age=max_age, path='/', secure=None, httponly=True)
+    except:
+      response = {"status": "NG"}
+    finally:
+      return response
+
+
+    
 
 
 @users_bp.route("/cookietest", methods=["GET"])

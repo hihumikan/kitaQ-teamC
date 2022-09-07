@@ -70,7 +70,7 @@ class Users:
     def user_login(self, email, password):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id FROM users WHERE email = '" + email + "' AND password = '" + password + "';"
+        sql = "SELECT id,user_name,description,isParent FROM users WHERE email = '" + email + "' AND password = '" + password + "';"
 
         print(sql)
         try:
