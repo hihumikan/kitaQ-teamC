@@ -1,11 +1,11 @@
-import { Box, Heading, SimpleGrid } from "@chakra-ui/react"
-import User from "../components/User"
-import Header from "../components/Header"
-import { useUsers } from "../context/UserContext"
-import { Link } from "react-router-dom"
+import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import User from "../components/User";
+import Header from "../components/Header";
+import { useUsers } from "../context/UserContext";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
-  const users = useUsers()
+  const users = useUsers();
   return (
     <Box>
       <Header>
@@ -14,7 +14,7 @@ export default function HomePage() {
       <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
         {users.map((user) => {
           return (
-            <Link to={`/timeline/${user.user_id}`}>
+            <Link to={`/timeline/${user.user_id}`} key={user.user_id}>
               <Box
                 _hover={{
                   textDecoration: "none",
@@ -29,9 +29,9 @@ export default function HomePage() {
                 />
               </Box>
             </Link>
-          )
+          );
         })}
       </SimpleGrid>
     </Box>
-  )
+  );
 }
