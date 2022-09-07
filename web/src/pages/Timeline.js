@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Center,
-  VStack,
-  Heading,
-  Button,
-  color,
-} from "@chakra-ui/react";
+import { Avatar, Center, VStack, Heading, Button } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import { BiPlus } from "react-icons/bi";
@@ -34,7 +27,7 @@ const PostItems = [
     created_at: "2021-05-01T00:00:00.000Z",
     updated_at: "2021-05-01T00:00:00.000Z",
   },
-]
+];
 function Timeline() {
   return (
     <>
@@ -71,8 +64,12 @@ function Timeline() {
         </Button>
         <VStack spacing={"75px"}>
           {PostItems.map((post) => (
-              <Link
-              _hover={{ textDecoration: "none", boxShadow: "sm", opacity: "0.95" }}
+            <Link
+              _hover={{
+                textDecoration: "none",
+                boxShadow: "sm",
+                opacity: "0.95",
+              }}
               to={`/onePostPage/${post.id}`}
             >
               <Post key={post.id} post={post} />
@@ -81,6 +78,6 @@ function Timeline() {
         </VStack>
       </div>
     </>
-  )
+  );
 }
-export default Timeline
+export default Timeline;

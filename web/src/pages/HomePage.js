@@ -1,47 +1,25 @@
 import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
-import PostCard from "../components/posts/PostCard";
+import User from "../components/User";
 import Header from "../components/Header";
+import { useUsers } from "../context/UserContext";
 
 export default function HomePage() {
-  const testPost = {
-    id: "aaa",
-    name: "むかいです",
-    title: "こんばんちゃ〜",
-    description:
-      "ハロおおおおおおおおおおおおおおおおおおおおロおおおおおおおおおおおおおおおおおおおおロおおおおおおおおおおおおおおおおおおおおロおおおおおおおおおおおおおおおおおおおお",
-  };
-  const testPosts = [
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-    testPost,
-  ];
+  const users = useUsers();
   return (
     <Box>
       <Header>
         <Heading>HOME</Heading>
       </Header>
-      <SimpleGrid
-        columns={3}
-        spacing={10}
-        columnGap={2}
-        px={20}
-        py={10}
-      >
-        {testPosts.map((m, i) => {
-          return <PostCard key={i} name={m.name} description={m.description} />;
+      <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
+        {users.map((user) => {
+          return (
+            <User
+              key={user.user_id}
+              name={user.user_name}
+              description={user.description}
+              image_url={user.image_url}
+            />
+          );
         })}
       </SimpleGrid>
     </Box>
