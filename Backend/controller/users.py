@@ -2,9 +2,9 @@ from flask import Blueprint
 from models.models import Users
 import os
 
-users_bp = Blueprint('users', __name__)
+users_bp = Blueprint('app', __name__)
 
-@app.route("/users")
+@users_bp.route("/users")
 def get_all_users():
     db = Users()
     data = db.get_all_users()
@@ -22,7 +22,7 @@ def get_all_users():
         })
     return result
 
-@app.route("/users/<user_id>", methods=["GET"])
+@users_bp.route("/users/<user_id>", methods=["GET"])
 def get_user(user_id):
     db = Users()
     user_data = db.get_user(user_id)
