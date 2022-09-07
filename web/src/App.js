@@ -15,6 +15,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<HomePage />} />
               <Route path="/timeline" element={<Timeline />} />
+              <Route path="/timeline/:id" element={<Timeline />} />
               <Route path="/onePostPage" element={<OnePostPage />} />
               <Route path="/onePostPage/:id" element={<OnePostPage />} />
             </Routes>
