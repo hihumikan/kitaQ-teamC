@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   swagger-editor:
@@ -29,7 +29,7 @@ services:
   flask:
     build: ../Backend/
     ports:
-      - "19000:5000"
+      - "49152:5000"
     container_name: flask
     volumes:
        - ../Backend/:/usr/src/app

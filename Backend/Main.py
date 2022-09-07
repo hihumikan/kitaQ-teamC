@@ -9,7 +9,6 @@ def hello():
     print("Hello, Flask!!")
     print("Hello, Flask!!")
 
-
 # GETパラメータの取得（クエリストリングより）
 # http://localhost:8888/
 @app.route('/')

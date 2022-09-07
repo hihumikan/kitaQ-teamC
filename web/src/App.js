@@ -1,11 +1,21 @@
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import "./App.css";
+import Timeline from "./pages/Timeline";
 
-function App({ children }) {
+function App() {
   return (
-    <div className="App">
-      <Navbar>{children}</Navbar>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/timeline" element={<Timeline />} />
+          </Routes>
+        </Navbar>
+      </div>
+    </BrowserRouter>
   );
 }
 
