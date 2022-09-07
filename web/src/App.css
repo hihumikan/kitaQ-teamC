@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+.balloon1 {
+  /* width: '120px'; */
+  position: relative;
+  display: inline-block;
+  margin: 1.5em 0;
+  padding: 7px 10px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #555;
+  font-size: 16px;
+  /* background: #e0edff; */
+  border: 1.5px solid #949292 ;
+  border-radius: 15px;
+}
+
+.balloon1:before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: -23px;
+  margin-top: -12px;
+  border: 12px solid transparent;
+  border-right: 12px solid #FFF;
+  z-index: 2;
+}
+.balloon1::after{
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: -26px;
+  margin-top: -13px;
+  border: 13px solid transparent;
+  border-right: 13px solid #949292;
+  z-index: 1;
+}
+
+.balloon1 p {
+  margin: 0;
+  padding: 0;
+}
