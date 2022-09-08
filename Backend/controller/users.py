@@ -193,9 +193,9 @@ def user_login():
         session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
         print(db.cookie_reg(user_id, session_id))
         response.set_cookie('session', value=session_id,
-                            max_age=max_age, path='/', secure=None, httponly=True)
+                            max_age=max_age, path='/', domain='kitaq.qqey.net', secure=None, httponly=True)
     except:
-        response = {"status": "NG"}
+        response = {"status": "NG"}, 401
     finally:
         return response
 
@@ -235,7 +235,7 @@ def cookie_reg():
     session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
     if db.cookie_reg(2, session_id):
         response.set_cookie('session', value=session_id,
-                            max_age=max_age, path='/', secure=None, httponly=True)
+                            max_age=max_age, path='/', domain='kitaq.qqey.net', secure=None, httponly=True)
     else:
         return response
 

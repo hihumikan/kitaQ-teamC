@@ -1,8 +1,10 @@
 from flask import Flask
 from controller.users import users_bp
 from controller.posts import posts_bp
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.register_blueprint(users_bp)
 app.register_blueprint(posts_bp)
 
