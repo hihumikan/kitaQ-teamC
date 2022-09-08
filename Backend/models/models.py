@@ -51,7 +51,6 @@ class Users:
         sql = "INSERT INTO users (user_name,email,password,description,isParent) VALUES( '" + user_name + \
             "','" + email + "','" + password + "','" + \
             description + "'," + str(isParent) + ");"
-
         print(sql)
         try:
             print(cursor.execute(sql))
@@ -66,11 +65,12 @@ class Users:
             cursor.close
             conn.close
             return False
-    
+
     def user_login(self, email, password):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id,user_name,description,isParent FROM users WHERE email = '" + email + "' AND password = '" + password + "';"
+        sql = "SELECT id,user_name,description,isParent FROM users WHERE email = '" + \
+            email + "' AND password = '" + password + "';"
 
         print(sql)
         try:
@@ -122,3 +122,52 @@ class Users:
             return cursor.fetchall()
         except:
             return None
+
+
+class Posts:
+    def _open(self):
+        self.dbh = mysql.connector.MySQLConnection(**self.dns)
+
+    def get_post(self, post_id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE id = " + \
+            str(post_id) + ";"
+        try:
+            cursor.execute(sql)
+            return cursor.fetchall()
+        except:
+            return None
+
+    def get_comments(self, post_id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "SELECT id,post_id,user_id,comment,created_at FROM comments WHERE post_id = " + \
+            str(post_id) + ";"
+        try:
+            cursor.execute(sql)
+            return cursor.fetchall()
+        except:
+            return None
+
+    def post_comment(self, id, user_id, comment) -> list:
+        print("sql")
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "INSERT INTO comments (post_id,user_id,comment) VALUES('" + \
+            str(id) + "','" + str(user_id) + "','" + str(comment) + "');"
+        print(sql)
+
+        try:
+            print(cursor.execute(sql))
+            print(conn.commit())
+            sql = "SELECT LAST_INSERT_ID();"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            cursor.close
+            conn.close
+            return result
+        except:
+            cursor.close
+            conn.close
+            return False
