@@ -13,7 +13,13 @@ function MyInputGroup({ name, icon, placeholder, ...rest }) {
         h={"52px"}
         rounded={"24px"}
       >
-        <InputLeftElement pointerEvents="none" children={icon} h={"full"} />
+        <InputLeftElement
+          pointerEvents="none"
+          children={icon}
+          h={"full"}
+          color={"grey"}
+          ml={"6px"}
+        />
         <Input
           type="text"
           size="md"
