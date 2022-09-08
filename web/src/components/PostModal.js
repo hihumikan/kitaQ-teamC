@@ -127,9 +127,9 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
                   style={{
                     display: "flex",
                     objectFit: "contain",
-                    width: "130px",
-                    height: "130px",
-                    borderRadius: "130px",
+                    width: "400px",
+                    height: "300px",
+                    // borderRadius: "130px",
                     margin: "0 auto",
                   }}
                 />
