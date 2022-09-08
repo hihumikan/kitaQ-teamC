@@ -7,13 +7,14 @@ import {
   VStack,
   Center,
   Img,
+  Button,
 } from "@chakra-ui/react";
-import { MdOutlineHome, MdOutlineSettings } from "react-icons/md";
+import { TbHome, TbBookmark } from "react-icons/tb";
 import Link from "./Link";
 
 const LinkItems = [
-  { name: "Home", icon: MdOutlineHome, to: "/" },
-  { name: "Settings", icon: MdOutlineSettings, to: "/timeline" },
+  { name: "Home", icon: TbHome, to: "/" },
+  { name: "Settings", icon: TbBookmark, to: "/timeline" },
 ];
 
 export default function Navbar({ children }) {
@@ -51,22 +52,21 @@ const SidebarContent = ({ onClose, ...rest }) => {
           fontSize="xl"
           fontFamily="monospace"
           fontWeight="bold"
-          mb={"130px"}
+          mb={"80px"}
         >
           <Img src="./logo.png" />
         </Heading>
-        <VStack spacing={"3"}>
+        <VStack spacing={"7"}>
           {LinkItems.map((link) => (
             <NavItem key={link.name} icon={link.icon} to={link.to} />
           ))}
         </VStack>
       </Box>
-      <Avatar
-        size="md"
-        src={
+      <Box as='button' borderRadius={"100px"} marginBottom={"60px"}>
+        <Img borderRadius={"100px"} width={"60px"}src={
           "http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"
-        }
-      />
+        }/>
+      </Box>
     </Flex>
   );
 };
