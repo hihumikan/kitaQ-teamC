@@ -2,7 +2,7 @@ backend:
   - Backend/*
 
 frontend:
-  - Web/*
+  - web/*
 
 infra:
   - docker/*
