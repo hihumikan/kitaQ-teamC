@@ -20,7 +20,7 @@ import axios from "axios";
 function Timeline() {
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
-  const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     const fetchData = async () => {

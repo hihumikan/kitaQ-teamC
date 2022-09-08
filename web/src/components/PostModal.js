@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { PrimaryButton, ModalButton } from "./Button";
 import axios from "axios";
+import postApi from "../api/post";
 
 function ProfileModal({ isOpen, onClose, posts, setPosts }) {
   const inputRef = useRef(null);
@@ -65,13 +66,11 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
 
   const postHandler = async () => {
     const newPost = {
-      post_id: 3,
-      created_at: Date.now(),
-      image_url: src,
-      image_alt: "画像の説明文",
-      title: title,
-      description: description,
+      file: src,
+      title,
+      description,
     };
+    postApi.post(newPost);
     setPosts([newPost, ...posts]);
     setTitle("");
     setDescription("");
