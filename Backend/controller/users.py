@@ -89,9 +89,9 @@ def user_patch():
     except:
         pass
     try:
-        description = str(data['descripton'])
+        description = str(data['description'])
         db = Users()
-        db.patch_user_description(session, description)
+        db.patch_user_description(user_id, description)
         # print(str(data['descripton']))
     except:
         pass

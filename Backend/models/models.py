@@ -18,9 +18,9 @@ class Commons:
     def cookie2userid(self, cookie) -> str:
         conn = conn_db()  # ここでDBに接続
         cursor = conn.cursor()
-        sql = "SELECT * FROM session WHERE session = '" + cookie + "';"
+        sql = "SELECT * FROM session WHERE session = %s;"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (cookie,))
             a = cursor.fetchall()
             print(a[0][0])
             return a[0][0]
@@ -30,11 +30,10 @@ class Commons:
     def cookie_reg(self, user_id, session) -> str:
         conn = conn_db()  # ここでDBに接続
         cursor = conn.cursor()
-        sql = "INSERT INTO session (user_id,session) VALUES (" + str(user_id) + ",'" + str(
-            session) + "') ON DUPLICATE KEY UPDATE session = VALUES(session);"
+        sql = "INSERT INTO session (user_id,session) VALUES (%s,'%s') ON DUPLICATE KEY UPDATE session = VALUES(session);"
         print(sql)
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (user_id, session))
             conn.commit()
             return True
         except:
@@ -48,12 +47,11 @@ class Users:
     def user_reg(self, user_name, email, password, isParent, description):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "INSERT INTO users (user_name,email,password,description,isParent) VALUES( '" + user_name + \
-            "','" + email + "','" + password + "','" + \
-            description + "'," + str(isParent) + ");"
+        sql = "INSERT INTO users (user_name,email,password,description,isParent) VALUES('%s','%s','%s','%s',%s);"
         print(sql)
         try:
-            print(cursor.execute(sql))
+            print(cursor.execute(
+                sql, (user_name, email, password, description, isParent)))
             print(conn.commit())
             sql = "SELECT LAST_INSERT_ID();"
             cursor.execute(sql)
@@ -69,12 +67,11 @@ class Users:
     def user_login(self, email, password):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id,user_name,description,isParent FROM users WHERE email = '" + \
-            email + "' AND password = '" + password + "';"
+        sql = "SELECT id,user_name,description,isParent FROM users WHERE `email` = %s AND `password` = %s;"
 
         print(sql)
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (email, password))
             return cursor.fetchall()
         except:
             cursor.close
@@ -94,9 +91,10 @@ class Users:
     def get_user(self, user_id) -> str:
         conn = conn_db()  # ここでDBに接続
         cursor = conn.cursor()
-        sql = "SELECT user_name FROM users WHERE id = " + str(user_id) + ";"
+        print(user_id)
+        sql = "SELECT user_name FROM users WHERE id = %s;"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (user_id,))
             return cursor.fetchall()
         except:
             return None
@@ -104,10 +102,9 @@ class Users:
     def get_user_post(self, user_id) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE user_id = " + \
-            str(user_id) + ";"
+        sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE user_id = %s;"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (user_id,))
             return cursor.fetchall()
         except:
             return None
@@ -115,11 +112,10 @@ class Users:
     def patch_user_name(self, user_id, user_name):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "UPDATE users SET user_name = '" + user_name + \
-            "' WHERE id = " + str(user_id) + ";"
-        print(sql)
+        sql = "UPDATE users SET user_name = %s WHERE id = %s;"
+        # print(sql)
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (user_name, user_id))
             conn.commit()
             return True
         except:
@@ -128,11 +124,10 @@ class Users:
     def patch_user_description(self, user_id, description):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "UPDATE users SET description = '" + description + \
-            "' WHERE id = " + str(user_id) + ";"
+        sql = "UPDATE users SET description = %s WHERE id = %s;"
         print(sql)
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (description, user_id))
             conn.commit()
             return True
         except:
@@ -141,10 +136,9 @@ class Users:
     def get_comment_cnt(self, post_id) -> str:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT COUNT(comment) FROM comments WHERE post_id = " + \
-            str(post_id) + ";"
+        sql = "SELECT COUNT(comment) FROM comments WHERE post_id = %s;"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (post_id,))
             return cursor.fetchall()
         except:
             return None
@@ -157,10 +151,9 @@ class Posts:
     def get_post(self, post_id) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE id = " + \
-            str(post_id) + ";"
+        sql = "SELECT id,user_id,title,description,created_at FROM posts WHERE id = %s;"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (post_id,))
             return cursor.fetchall()
         except:
             return None
@@ -168,11 +161,10 @@ class Posts:
     def get_comments(self, post_id) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT id,post_id,user_id,comment,created_at FROM comments WHERE post_id = " + \
-            str(post_id) + ";"
+        sql = "SELECT id,post_id,user_id,comment,created_at FROM comments WHERE post_id = %s;"
         print(sql)
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (post_id,))
             return cursor.fetchall()
         except:
             return None
@@ -180,11 +172,9 @@ class Posts:
     def post(self, user_id, title, description) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "INSERT INTO posts (user_id,title,description) VALUES(" + \
-            str(user_id) + ",'" + str(title) + \
-            "','" + str(description) + "');"
+        sql = "INSERT INTO posts (user_id,title,description) VALUES(%s,%s,%s);"
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (user_id, title, description))
             conn.commit()
             sql = "SELECT LAST_INSERT_ID();"
             cursor.execute(sql)
@@ -200,12 +190,11 @@ class Posts:
     def post_comment(self, id, user_id, comment) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "INSERT INTO comments (post_id,user_id,comment) VALUES('" + \
-            str(id) + "','" + str(user_id) + "','" + str(comment) + "');"
+        sql = "INSERT INTO comments (post_id,user_id,comment) VALUES(%s,%s,%s);"
         print(sql)
 
         try:
-            cursor.execute(sql)
+            cursor.execute(sql, (id, user_id, comment))
             conn.commit()
             sql = "SELECT LAST_INSERT_ID();"
             cursor.execute(sql)
@@ -221,8 +210,8 @@ class Posts:
     def comment_user_get(self, id) -> list:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT user_id FROM comments WHERE id = " + str(id) + ";"
-        cursor.execute(sql)
+        sql = "SELECT user_id FROM comments WHERE id = %s;"
+        cursor.execute(sql, (id,))
         result = cursor.fetchall()
         cursor.close
         conn.close
@@ -232,8 +221,8 @@ class Posts:
         conn = conn_db()
         cursor = conn.cursor()
         try:
-            sql = "DELETE FROM comments WHERE id = " + str(id) + ";"
-            cursor.execute(sql)
+            sql = "DELETE FROM comments WHERE id = %s;"
+            cursor.execute(sql, (id,))
             conn.commit()
             cursor.close
             conn.close
@@ -247,8 +236,8 @@ class Posts:
         conn = conn_db()
         cursor = conn.cursor()
         try:
-            sql = "DELETE FROM posts WHERE id = " + str(id) + ";"
-            cursor.execute(sql)
+            sql = "DELETE FROM posts WHERE id = %s;"
+            cursor.execute(sql, (id,))
             conn.commit()
             cursor.close
             conn.close
@@ -262,8 +251,8 @@ class Posts:
         conn = conn_db()
         cursor = conn.cursor()
         try:
-            sql = "DELETE FROM comments WHERE post_id = " + str(id) + ";"
-            cursor.execute(sql)
+            sql = "DELETE FROM comments WHERE post_id = %s;"
+            cursor.execute(sql, (id,))
             conn.commit()
             cursor.close
             conn.close
