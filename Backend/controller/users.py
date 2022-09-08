@@ -5,6 +5,7 @@ import uuid
 import hashlib
 import json
 import base64
+
 users_bp = Blueprint('app', __name__)
 
 
@@ -80,22 +81,35 @@ def user_patch():
     if user_id == None:
         return {"status": "NG"}, 401
 
-    if (str(data['user_name']) != None):
+    try:
+        user_name = str(data['user_name'])
         db = Users()
-        db.patch_user_name(user_id, str(data['user_name']))
-    if (str(data['description']) != None):
+        db.patch_user_name(user_id, user_name)
+        # print(str(data['user_name']))
+    except:
+        pass
+    try:
+        description = str(data['descripton'])
         db = Users()
-        db.patch_user_description(session, str(data['descripton']))
-    if (request.files['file'] != None):
-        file = base64.b64decode(data['file'])
-        file.save("static/users/" + str(user_id) + ".webp")
+        db.patch_user_description(session, description)
+        # print(str(data['descripton']))
+    except:
+        pass
+    try:
+        encode = base64.b64decode((data['file']))
+        with open("static/users/" + str(user_id) + ".webp", "wb") as f:
+            f.write(encode)
+        #file.save("static/users/" + str(user_id) + ".webp")
+        print("file")
+    except:
+        pass
 
     return {"status": "OK"}, 200
 
 
 @users_bp.route("/signup", methods=["POST"])
 def user_reg():
-    data = {}
+    user_data = {}
     output = {}
     db = Users()
     try:
@@ -105,7 +119,7 @@ def user_reg():
         email = str(data['email'])
         password = hashlib.md5(str(data['password']).encode()).hexdigest()
         isParent = str(data['isParent'])
-        file = base64.b64decode(data['file'])
+        file = data['file']
         description = str(data['description'])
     except:
         return {"status": "NG"}, 400
@@ -114,7 +128,9 @@ def user_reg():
         result = db.user_reg(user_name, email, password, isParent, description)
         user_id = result[0][0]
 
-        file.save("static/users/" + str(user_id) + ".webp")
+        decode = base64.b64decode(file)
+        with open("static/users/" + str(user_id) + ".webp", "wb") as f:
+            f.write(decode)
 
         if os.path.isfile("static/users/" + str(user_id) + ".webp"):
             image = "http://api.kitaq.qqey.net/static/users/" + \
@@ -122,7 +138,7 @@ def user_reg():
         else:
             image = None
 
-        data.update({
+        user_data.update({
             "user_id": user_id,
             "user_name": user_name,
             "description": description,
@@ -132,7 +148,7 @@ def user_reg():
 
         output.update({
             "status": "OK",
-            "user_data": data
+            "user_data": user_data
         })
         response = make_response(output)
 

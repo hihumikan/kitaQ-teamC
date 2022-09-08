@@ -114,15 +114,16 @@ def post():
     try:
         title = str(data['title'])
         file = base64.b64decode(data['file'])
-        description = str(data['desctption'])
+        description = str(data['description'])
     except:
-        return {"status": "NG"}, 404
+        return {"status": "NG"}, 400
     user_id = com.cookie2userid(session)
     if user_id == None:
         return {"status": "NG"}, 401
     try:
         post_id = db_post.post(user_id, title, description)
-        file.save("static/posts/" + str(post_id[0][0]) + ".webp")
+        with open("static/posts/" + str(post_id[0][0]) + ".webp", "wb") as f:
+            f.write(file)
         return {"status": "OK",
                 "post_id": post_id[0][0]}, 200
     except:
