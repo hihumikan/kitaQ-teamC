@@ -2,7 +2,6 @@ import {
   Avatar,
   Center,
   VStack,
-  Heading,
   Button,
   Text,
   useDisclosure,
@@ -10,7 +9,7 @@ import {
 import Header from "../components/Header";
 import Post from "../components/Post";
 import PostModal from "../components/PostModal";
-import { BiPlus } from "react-icons/bi";
+import { TbPencil } from "react-icons/tb";
 import { IconContext } from "react-icons";
 
 import { Link } from "react-router-dom";
@@ -51,8 +50,7 @@ function Timeline() {
       </div>
       <div>
         <Button
-          color={"black"}
-          bg="white"
+          bg={"white"}
           height="170px"
           width="170px"
           borderRadius={"60px"}
@@ -60,14 +58,14 @@ function Timeline() {
           marginLeft={"400px"}
           marginTop={"400px"}
           boxShadow={"xl"}
-          _hover={{ boxShadow:"sm" }}
+          _hover={{ boxShadow: "sm" }}
           onClick={onOpen}
         >
-          <IconContext.Provider value={{ color: "F1873B", size: "60px" }}>
-            <BiPlus />
+          <IconContext.Provider value={{ color: "#EFB6BF", size: "50px" }}>
+            <TbPencil />
           </IconContext.Provider>
         </Button>
-        <VStack spacing={"75px"} mr={"40px"} mt={"80px"}>
+        <VStack spacing={"75px"} mr={"45px"} mt={"80px"}>
           {posts.map((post) => (
             <Link
               _hover={{

@@ -6,12 +6,12 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { MdOutlinePerson, MdLockOutline } from "react-icons/md";
 import { IoMdClose } from "react-icons/io";
+import { TbLock } from "react-icons/tb";
 import { PrimaryButton, ModalButton } from "./Button";
 import Link from "./Link";
 import MyInputGroup from "./MyInputGroup";
@@ -26,11 +26,11 @@ function LoginModal({ isOpen, onClose }) {
       isOpen={isOpen}
       onClose={onClose}
       size="3xl"
+      isCentered="true"
     >
       <ModalOverlay />
       <ModalContent alignItems={"center"} py={"64px"}>
-        <ModalHeader fontSize={"3xl"}>User login</ModalHeader>
-        {/* <ModalCloseButton /> */}
+        <ModalHeader fontSize={"3xl"}>ログイン</ModalHeader>
         <ModalButton
           icon={<IoMdClose />}
           onClick={onClose}
@@ -46,7 +46,7 @@ function LoginModal({ isOpen, onClose }) {
           />
           <MyInputGroup
             name={"password"}
-            icon={<MdLockOutline color="gray.800" />}
+            icon={<TbLock color="gray.800" />}
             placeholder={"パスワード"}
             mb={9}
           />
@@ -54,7 +54,7 @@ function LoginModal({ isOpen, onClose }) {
 
         <ModalFooter>
           <VStack>
-            <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9} onClick={onClose}>
+            <PrimaryButton mr={3} size={"lg"} mb={9} onClick={onClose}>
               ログイン
             </PrimaryButton>
             <Text>
