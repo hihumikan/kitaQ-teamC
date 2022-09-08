@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { TbHome, TbBookmark } from "react-icons/tb";
 import Link from "./Link";
+import { useAuth } from "../context/AuthContext";
 
 const LinkItems = [
   { name: "Home", icon: TbHome, to: "/" },
@@ -18,6 +19,9 @@ const LinkItems = [
 ];
 
 export default function Navbar({ children }) {
+  const user = useAuth();
+  console.log(user);
+
   return (
     <Box
       minH="100vh"
