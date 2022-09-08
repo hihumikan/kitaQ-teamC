@@ -67,16 +67,28 @@ def get_user(user_id):
 
 @users_bp.route("/user", methods=["PATCH"])
 def user_patch():
-    session = request.cookies.get('session', None)
-    db = Commons()
-    user_id = db.cookie2userid(session)
-    print(user_id)
 
-    user_name = request.form['user_name']
-    description = request.form['description']
-    image = request.files['image']
-    image.save("static/users/" + "hoge" + ".webp")
-    return
+    session = request.cookies.get('session', None)
+    if session == None:
+        print("session err")
+        return {"status": "NG"}, 401
+
+    com = Commons()
+    user_id = com.cookie2userid(session)
+    if user_id == None:
+        return {"status": "NG"}, 401
+
+    if (request.form["user_name"] != None):
+        db = Users()
+        db.patch_user_name(user_id, request.form["user_name"])
+    if (request.form["description"] != None):
+        db = Users()
+        db.patch_user_description(session, request.form["description"])
+    if (request.files['file'] != None):
+        file = request.files['file']
+        file.save("static/users/" + str(user_id) + ".webp")
+
+    return {"status": "OK"}, 200
 
 
 @users_bp.route("/signup", methods=["POST"])
@@ -181,9 +193,9 @@ def user_login():
         session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
         print(db.cookie_reg(user_id, session_id))
         response.set_cookie('session', value=session_id,
-                            max_age=max_age, path='/', secure=None, httponly=True)
+                            max_age=max_age, path='/', domain='kitaq.qqey.net', secure=None, httponly=True)
     except:
-        response = {"status": "NG"}
+        response = {"status": "NG"}, 401
     finally:
         return response
 
@@ -223,7 +235,7 @@ def cookie_reg():
     session_id = str(uuid.uuid4()).replace('-', '')  # -の影響で32文字にならないので-を抜く
     if db.cookie_reg(2, session_id):
         response.set_cookie('session', value=session_id,
-                            max_age=max_age, path='/', secure=None, httponly=True)
+                            max_age=max_age, path='/', domain='kitaq.qqey.net', secure=None, httponly=True)
     else:
         return response
 

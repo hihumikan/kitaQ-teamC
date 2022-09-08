@@ -19,4 +19,5 @@ jobs:
             cd kitaQ-teamC/
             echo ${{secrets.SUDO_PASSWORD}} | sudo -S make down
             git pull
+            echo ${{secrets.SUDO_PASSWORD}}  | sudo -S make build
             echo ${{secrets.SUDO_PASSWORD}}  | sudo -S make up

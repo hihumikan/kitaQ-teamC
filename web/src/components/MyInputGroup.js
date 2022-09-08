@@ -4,7 +4,7 @@ import {
   InputLeftElement,
   Input,
 } from "@chakra-ui/react";
-function MyInputGroup({ name, icon, placeholder, ...rest }) {
+function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
   return (
     <FormControl id={name} {...rest}>
       <InputGroup
@@ -21,17 +21,20 @@ function MyInputGroup({ name, icon, placeholder, ...rest }) {
           ml={"6px"}
         />
         <Input
-          type="text"
-          size="md"
+          name={name}
+          type='text'
+          size='md'
           placeholder={placeholder}
           border={"none"}
           h={"full"}
           w={"full"}
           rounded={"24px"}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
       </InputGroup>
     </FormControl>
-  );
+  )
 }
 
-export default MyInputGroup;
+export default MyInputGroup

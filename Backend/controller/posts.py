@@ -119,6 +119,28 @@ def post():
         return {"status": "NG"}, 500
 
 
+@posts_bp.route("/post/<post_id>", methods=['DELETE'])
+def post_del(post_id):
+    com = Commons()
+    db = Posts()
+    session = request.cookies.get('session', None)
+    if session == None:
+        return {"status": "NG"}, 401
+    user_id = com.cookie2userid(session)
+    if user_id == None:
+        return {"status": "NG"}, 401
+    post_data = db.get_post(post_id)
+    if user_id != post_data[0][1]:
+        return {"status": "NG"}, 403
+    try:
+        db.delete_comment_post(post_id)
+        db.delete_post(post_id)
+        return {"status": "OK",
+                "posts_id": post_id}
+    except:
+        return {"status": "NG"}, 500
+
+
 '''
 @posts_bp.route("/comment_user_test", methods=['GET'])
 def comment_user_test():

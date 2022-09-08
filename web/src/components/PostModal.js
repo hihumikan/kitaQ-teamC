@@ -73,7 +73,9 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
     postApi.post(newPost);
     setPosts([newPost, ...posts]);
     setTitle("");
+    setButton(true)
     setDescription("");
+    console.log(newPost);
     onClose();
   };
 
