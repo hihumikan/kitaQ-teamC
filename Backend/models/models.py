@@ -115,7 +115,7 @@ class Users:
     def get_comment_cnt(self, post_id) -> str:
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "SELECT COUNT(comment) FROM comments WHERE id = " + \
+        sql = "SELECT COUNT(comment) FROM comments WHERE post_id = " + \
             str(post_id) + ";"
         try:
             cursor.execute(sql)
@@ -207,6 +207,36 @@ class Posts:
         cursor = conn.cursor()
         try:
             sql = "DELETE FROM comments WHERE id = " + str(id) + ";"
+            cursor.execute(sql)
+            conn.commit()
+            cursor.close
+            conn.close
+            return True
+        except:
+            cursor.close
+            conn.close
+            return False
+
+    def delete_post(self, id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        try:
+            sql = "DELETE FROM posts WHERE id = " + str(id) + ";"
+            cursor.execute(sql)
+            conn.commit()
+            cursor.close
+            conn.close
+            return True
+        except:
+            cursor.close
+            conn.close
+            return False
+
+    def delete_comment_post(self, id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        try:
+            sql = "DELETE FROM comments WHERE post_id = " + str(id) + ";"
             cursor.execute(sql)
             conn.commit()
             cursor.close
