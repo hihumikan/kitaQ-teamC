@@ -4,7 +4,7 @@ import os
 import uuid
 import hashlib
 import json
-
+import base64
 users_bp = Blueprint('app', __name__)
 
 
@@ -68,7 +68,8 @@ def get_user(user_id):
 
 @users_bp.route("/user", methods=["PATCH"])
 def user_patch():
-
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
     session = request.cookies.get('session', None)
     if session == None:
         print("session err")
@@ -79,14 +80,14 @@ def user_patch():
     if user_id == None:
         return {"status": "NG"}, 401
 
-    if (request.form["user_name"] != None):
+    if (str(data['user_name']) != None):
         db = Users()
-        db.patch_user_name(user_id, request.form["user_name"])
-    if (request.form["description"] != None):
+        db.patch_user_name(user_id, str(data['user_name']))
+    if (str(data['description']) != None):
         db = Users()
-        db.patch_user_description(session, request.form["description"])
+        db.patch_user_description(session, str(data['descripton']))
     if (request.files['file'] != None):
-        file = request.files['file']
+        file = base64.b64decode(data['file'])
         file.save("static/users/" + str(user_id) + ".webp")
 
     return {"status": "OK"}, 200
@@ -98,12 +99,14 @@ def user_reg():
     output = {}
     db = Users()
     try:
-        user_name = request.form['user_name']
-        email = request.form['email']
-        password = hashlib.md5(request.form['password'].encode()).hexdigest()
-        isParent = request.form['isParent']
-        file = request.files['file']
-        description = request.form['description']
+        data = request.data.decode('utf-8')
+        data = json.loads(data)
+        user_name = str(data['user_name'])
+        email = str(data['email'])
+        password = hashlib.md5(str(data['password']).encode()).hexdigest()
+        isParent = str(data['isParent'])
+        file = base64.b64decode(data['file'])
+        description = str(data['description'])
     except:
         return {"status": "NG"}, 400
 

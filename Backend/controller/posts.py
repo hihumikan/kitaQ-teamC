@@ -2,6 +2,8 @@ from urllib import request
 from flask import Blueprint, request
 from models.models import Posts, Commons, Users
 import os
+import json
+import base64
 
 posts_bp = Blueprint('posts_bp', __name__)
 
@@ -58,8 +60,11 @@ def posts_get(post_id):
 def post_comment(id):
     com = Commons()
     db_post = Posts()
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
+
     session = request.cookies.get('session', None)
-    comment = request.form['comment']
+    comment = str(data['comment'])
     user_id = com.cookie2userid(session)
     if user_id == None:
         return {"status": "NG"}, 401
@@ -75,8 +80,11 @@ def post_comment(id):
 def delete_comment(id):
     com = Commons()
     db_post = Posts()
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
+
     session = request.cookies.get('session', None)
-    comment_id = request.form['comment_id']
+    comment_id = str(data['comment_id'])
     if session == None:
         return {"status": "NG"}, 401
     user_id = com.cookie2userid(session)
@@ -98,13 +106,15 @@ def delete_comment(id):
 def post():
     com = Commons()
     db_post = Posts()
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
     session = request.cookies.get('session', None)
     if session == None:
         return {"status": "NG"}, 401
     try:
-        title = request.form['title']
-        file = request.files['file']
-        description = request.form['description']
+        title = str(data['title'])
+        file = base64.b64decode(data['file'])
+        description = str(data['desctption'])
     except:
         return {"status": "NG"}, 404
     user_id = com.cookie2userid(session)
