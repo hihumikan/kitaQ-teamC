@@ -3,6 +3,7 @@ from models.models import Users, Commons
 import os
 import uuid
 import hashlib
+import json
 
 users_bp = Blueprint('app', __name__)
 
@@ -104,7 +105,7 @@ def user_reg():
         file = request.files['file']
         description = request.form['description']
     except:
-        return {"status": "NG"}, 401
+        return {"status": "NG"}, 400
 
     try:
         result = db.user_reg(user_name, email, password, isParent, description)
@@ -141,7 +142,7 @@ def user_reg():
                             max_age=max_age, path='/', secure=None, httponly=True)
         return response
     except:
-        response = {"status": "NG"}
+        response = {"status": "NG"}, 400
     finally:
         return response
 
@@ -150,8 +151,11 @@ def user_reg():
 def user_login():
     db = Users()
 
-    email = request.form['email']
-    password = hashlib.md5(request.form['password'].encode()).hexdigest()
+    data = request.data.decode('utf-8')
+    data = json.loads(data)
+
+    email = str(data['email'])
+    password = hashlib.md5(str(data['password']).encode()).hexdigest()
 
     result = db.user_login(email, password)
     print(result)
