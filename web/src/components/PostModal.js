@@ -2,6 +2,8 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { TbCloudUpload } from "react-icons/tb";
 import { ImageCropper } from "./ImageCropper";
+import { IoMdClose } from "react-icons/io";
+
 import {
   Modal,
   ModalOverlay,
@@ -86,16 +88,23 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalCloseButton />
+        <ModalButton
+          icon={<IoMdClose />}
+          onClick={onClose}
+          pos="absolute"
+          right={"20"}
+          top={"10"}
+        ></ModalButton>
+        {/* <ModalCloseButton /> */}
         <ModalBody pb={6}>
           <VStack h="100%">
             {button ? (
               <div>
                 <Button
-                  h={"130px"}
-                  w={"130px"}
+                  h={"300px"}
+                  w={"400px"}
                   bg={"gray.300"}
-                  borderRadius={"130px"}
+                  // borderRadius={"130px"}
                   mt={"80px"}
                   onClick={fileUpload}
                 >
@@ -118,16 +127,15 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
                   style={{
                     display: "flex",
                     objectFit: "contain",
-                    width: "130px",
-                    height: "130px",
-                    borderRadius: "130px",
+                    width: "400px",
+                    height: "300px",
                     margin: "0 auto",
                   }}
                 />
                 <ImageCropper
                   open={open}
                   setOpen={setOpen}
-                  aspect={{ width: 130, height: 130 }}
+                  aspect={{ width: 400, height: 300 }}
                   src={src}
                   previewCanvasRef={previewCanvasRef}
                   setCroppedFile={setCroppedFile}

@@ -26,7 +26,9 @@ const ChatCard = () => {
             mt={"30px"}
             src="https://s3-alpha-sig.figma.com/img/4cf5/b7a9/8b8488a48edc7a28c40762e9e41de954?Expires=1663545600&Signature=aCR-1PHLZN2xMTE8MG8qAo8wgtDRK~z1dkyZM18soNv7slVduN3zRJdJvC7r8pB~hg6HbBGfju95ZNVSvPvKsvI8ZsSG4fNfWTQrps3QijGKrM5fxYKhzH6ErEWPs1tlyBV7dssB6lK72jlorXXyij4MXGUhoehZ8IsSHJguKGm5HDAGuYT-OnAl8oOV35c6rPKJDi2IW33FA2UFTgGnwQtkLBon18Ry345pfelkR6slcETFXg9aVfJhrTgp7GJIzkoMnGEUGjAx~~BtpuQBeNqKgNDSU104dGY-n-R7Sow0l~9HGQjhlOuepRV3o-gdndWihG7zT21ukDcloNFDDQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
           ></Avatar>
-          <Text w={"80%"}>むかい　ゆうき</Text>
+          <Text w={"100%"} fontSize={"2xs"}>
+            むかい ゆうき
+          </Text>
         </VStack>
 
         <Spacer></Spacer>
@@ -85,6 +87,7 @@ export default function OnePostPage() {
         bgColor={"white"}
         borderRadius={"3xl"}
         p={7}
+        boxShadow={"xl"}
       >
         <Flex h={"full"}>
           <Box w={"60%"} h={""} bgColor={""} pl={"70px"}>
@@ -95,14 +98,14 @@ export default function OnePostPage() {
               <Box h={"30px"}></Box>
               <Image
                 src={
-                  "https://s3-alpha-sig.figma.com/img/ab88/555e/bf97db9a062b15c16368c0ad75c378de?Expires=1663545600&Signature=QwyMrfscA7V6mTNXSJCpp43kcfiBriiIhr3oZ76K0iCHh0kd8OuzcHWQRDCyObX5AYYlrwmCGi5uvZWtvArcMERrgBDRNauBwYkviJAq9ISho8eB18Ll5kEVeBCASxFKsKTy6rwEpYdIcJk36cFtUMMbOB2t9eV704157UdiPAztleDFUDTo2qRKw2sPlKszeGUDIGD6k8RJhvFCt9wOsJimY3~Xon2QQHEGRYv8PwJf3XNDvqrIFcOs5itZDa6vlA6jE1Q661pmaF0Fz4GnkVbF2o3bTJeulcEBy76OQpxy-XXAk7mCJ67TevXWV3SRSi0Yyy8WkimxuLlSlPVNCQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                  "https://cdn.clipkit.co/tenants/381/articles/images/000/133/901/large/0e183ddb-f1ed-4df5-902e-fdd7817adbf2.jpg?1633183765"
                 }
                 alt={""}
               />
               <Spacer></Spacer>
               <Spacer></Spacer>
               <Text bgColor="" fontSize={"30px"} mt="20px">
-                ラーメン作りました！
+                今日は...
               </Text>
               <Spacer></Spacer>
               <Text bgColor="" mt="20px" textAlign={"left"}>

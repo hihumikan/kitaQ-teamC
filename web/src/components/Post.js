@@ -20,8 +20,8 @@ function Post({ post }) {
         p={"10"}
         maxW={"642px"}
         gap={"36px"}
-        boxShadow={"xl"}
-        _hover={{ boxShadow:"sm" }}
+        boxShadow={"xs"}
+        _hover={{ boxShadow: "sm" }}
       >
         <Text ml="auto" color={"#8C8A8A"}>
           {post.created_at}

@@ -13,9 +13,8 @@ import {
   Input,
   Button,
   VStack,
-  Img,
 } from "@chakra-ui/react";
-import { PrimaryButton, ModalButton } from "./Button";
+import { PrimaryButton } from "./Button";
 
 function ProfileModal({ isOpen, onClose }) {
   const inputRef = useRef(null);
@@ -54,15 +53,14 @@ function ProfileModal({ isOpen, onClose }) {
         reader.readAsDataURL(file);
         setOpen(true);
         setButton(false);
-
       }
     },
     [setSrc]
   );
-    const handleClose=()=>{
-      setButton(true)
-      onClose()
-    }
+  const handleClose = () => {
+    setButton(true);
+    onClose();
+  };
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -99,16 +97,16 @@ function ProfileModal({ isOpen, onClose }) {
                 />
               </div>
             ) : (
-              <div style={{marginTop:"80px"}}>
+              <div style={{ marginTop: "80px" }}>
                 <canvas
                   ref={previewCanvasRef}
                   style={{
-                    display:"flex",
+                    display: "flex",
                     objectFit: "contain",
                     width: "130px",
                     height: "130px",
                     borderRadius: "130px",
-                    margin: "0 auto"
+                    margin: "0 auto",
                   }}
                 />
                 <ImageCropper
@@ -133,8 +131,14 @@ function ProfileModal({ isOpen, onClose }) {
         </ModalBody>
 
         <ModalFooter justifyContent="center" mb={"100px"}>
-          <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9} onClick={handleClose}>
-            始める
+          <PrimaryButton
+            colorScheme="blue"
+            mr={3}
+            size={"lg"}
+            mb={9}
+            onClick={handleClose}
+          >
+            保存する
           </PrimaryButton>
         </ModalFooter>
       </ModalContent>
