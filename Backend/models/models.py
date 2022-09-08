@@ -112,6 +112,32 @@ class Users:
         except:
             return None
 
+    def patch_user_name(self, user_id, user_name):
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "UPDATE users SET user_name = '" + user_name + \
+            "' WHERE id = " + str(user_id) + ";"
+        print(sql)
+        try:
+            cursor.execute(sql)
+            conn.commit()
+            return True
+        except:
+            return None
+
+    def patch_user_description(self, user_id, description):
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "UPDATE users SET description = '" + description + \
+            "' WHERE id = " + str(user_id) + ";"
+        print(sql)
+        try:
+            cursor.execute(sql)
+            conn.commit()
+            return True
+        except:
+            return None
+
     def get_comment_cnt(self, post_id) -> str:
         conn = conn_db()
         cursor = conn.cursor()
