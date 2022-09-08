@@ -14,11 +14,15 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     platform: linux/x86_64
+  flask:
+    build: ../Backend/
+    ports:
+      - "49152:5000"
+    container_name: flask
+    volumes:
+       - ../Backend/:/usr/src/app
+    command: flask run --host=0.0.0.0
 
 volumes:
   mysql-data:
     name: kitaq-volume
-
-networks:
-  kitaq_network:
-    external: true

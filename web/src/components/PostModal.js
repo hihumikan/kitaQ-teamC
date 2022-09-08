@@ -89,12 +89,12 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
       <ModalOverlay />
       <ModalContent>
         <ModalButton
-            icon={<IoMdClose />}
-            onClick={onClose}
-            pos="absolute"
-            right={"20"}
-            top={"10"}
-          ></ModalButton>
+          icon={<IoMdClose />}
+          onClick={onClose}
+          pos="absolute"
+          right={"20"}
+          top={"10"}
+        ></ModalButton>
         {/* <ModalCloseButton /> */}
         <ModalBody pb={6}>
           <VStack h="100%">

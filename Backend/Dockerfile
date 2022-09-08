@@ -1,4 +1,4 @@
-FROM python:3.10-slim-buster
+FROM python:3.10
 
 WORKDIR /usr/src/app
 ENV FLASK_APP=app

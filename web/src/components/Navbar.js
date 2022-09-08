@@ -1,8 +1,11 @@
-import { Avatar, Box, Flex, Icon, Heading, VStack, Center, Img, Button } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Icon, Heading, VStack, Center, Img, Button   useDisclosure,
+} from "@chakra-ui/react"
 import { TbHome, TbBookmark } from "react-icons/tb"
 import Link from "./Link"
 import { useAuth } from "../context/AuthContext"
 import { useEffect, useState } from "react"
+import ProfileModal from "./ProfileModal";
+
 
 const LinkItems = [
   { name: "Home", icon: TbHome, to: "/" },
@@ -29,31 +32,44 @@ export default function Navbar({ children }) {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const user = useAuth()
+  const {
+    isOpen: isOpenProfile,
+    onOpen: onOpenProfile,
+    onClose: onClosePrfile,
+  } = useDisclosure();
   return (
-    <Flex
-      bg='#FFFFFF'
-      pos='fixed'
-      w='134px'
-      h='full'
-      // py="10"
-      flexDirection='column'
-      justifyContent='space-between'
-      alignItems='center'
-      {...rest}
-    >
-      {console.log(user)}
-      <Box w={"full"}>
-        <Heading fontSize='xl' fontFamily='monospace' fontWeight='bold' mb={"80px"}>
-          <Img src='/logo.png' />
-        </Heading>
-        <VStack spacing={"7"}>
-          {LinkItems.map((link) => (
-            <NavItem key={link.name} icon={link.icon} to={link.to} />
-          ))}
-        </VStack>
-      </Box>
-      <Box as='button' borderRadius={"100px"} marginBottom={"60px"}>
-        {user != undefined ? (
+    <>
+      <Flex
+        bg="#FFFFFF"
+        pos="fixed"
+        w="134px"
+        h="full"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems="center"
+        {...rest}
+      >
+        <Box w={"full"}>
+          <Heading fontSize="xl" fontWeight="bold" mb={"80px"}>
+            <Img src="/logo.png" />
+          </Heading>
+          <VStack spacing={"7"}>
+            {LinkItems.map((link) => (
+              <NavItem key={link.name} icon={link.icon} to={link.to} />
+            ))}
+          </VStack>
+        </Box>
+        <Box
+          as="button"
+          borderRadius={"100px"}
+          marginBottom={"60px"}
+          boxShadow={"2xl"}
+          _hover={{
+            boxShadow: "sm",
+          }}
+          onClick={onOpenProfile}
+        >
+          {user != undefined ? (
           <Img
             borderRadius={"100px"}
             width={"60px"}
@@ -64,10 +80,13 @@ const SidebarContent = ({ onClose, ...rest }) => {
         ) : (
           <></>
         )}
-      </Box>
-    </Flex>
-  )
-}
+        </Box>
+      </Flex>
+      <ProfileModal isOpen={isOpenProfile} onClose={onClosePrfile} />
+    </>
+
+  );
+};
 
 const NavItem = ({ icon, to }) => {
   return (
@@ -77,24 +96,16 @@ const NavItem = ({ icon, to }) => {
       h={"50px"}
       href='#'
       style={{ textDecoration: "none" }}
-      cursor='pointer'
+      cursor="pointer"
+      transition={".2s"}
+
       _focus={{ boxShadow: "none" }}
       _hover={{
-        borderRight: "2px solid #F1873B",
+        borderRight: "2px solid #FFC2CC",
         pl: "2px",
       }}
     >
-      <Center h={"full"}>
-        {icon && (
-          <Icon
-            fontSize='27px'
-            // _groupHover={{
-            //   color: "white",
-            // }}
-            as={icon}
-          />
-        )}
-      </Center>
+      <Center h={"full"}>{icon && <Icon fontSize="27px" as={icon} />}</Center>
     </Link>
   )
 }
