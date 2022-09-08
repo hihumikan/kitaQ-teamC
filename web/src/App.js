@@ -5,24 +5,27 @@ import "./App.css";
 import Timeline from "./pages/Timeline";
 import OnePostPage from "./pages/OnePostPage";
 import { UserProvider } from "./context/UserContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <UserProvider>
-      <BrowserRouter>
-        <div className="App">
-          <Navbar>
-            <Routes>
-              <Route exact path="/" element={<HomePage />} />
-              <Route path="/timeline" element={<Timeline />} />
-              <Route path="/timeline/:id" element={<Timeline />} />
-              <Route path="/onePostPage" element={<OnePostPage />} />
-              <Route path="/onePostPage/:id" element={<OnePostPage />} />
-            </Routes>
-          </Navbar>
-        </div>
-      </BrowserRouter>
-    </UserProvider>
+    <AuthProvider>
+      <UserProvider>
+        <BrowserRouter>
+          <div className="App">
+            <Navbar>
+              <Routes>
+                <Route exact path="/" element={<HomePage />} />
+                <Route path="/timeline" element={<Timeline />} />
+                <Route path="/timeline/:id" element={<Timeline />} />
+                <Route path="/onePostPage" element={<OnePostPage />} />
+                <Route path="/onePostPage/:id" element={<OnePostPage />} />
+              </Routes>
+            </Navbar>
+          </div>
+        </BrowserRouter>
+      </UserProvider>
+    </AuthProvider>
   );
 }
 

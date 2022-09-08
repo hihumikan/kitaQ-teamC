@@ -1,5 +1,10 @@
-import { FormControl, InputGroup, InputLeftElement, Input } from "@chakra-ui/react"
-function MyInputGroup({ name, icon, placeholder, ...rest }) {
+import {
+  FormControl,
+  InputGroup,
+  InputLeftElement,
+  Input,
+} from "@chakra-ui/react";
+function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
   return (
     <FormControl id={name} {...rest}>
       <InputGroup
@@ -24,6 +29,8 @@ function MyInputGroup({ name, icon, placeholder, ...rest }) {
           h={"full"}
           w={"full"}
           rounded={"24px"}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
       </InputGroup>
     </FormControl>
