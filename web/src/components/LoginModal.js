@@ -54,7 +54,7 @@ function LoginModal({ isOpen, onClose }) {
 
         <ModalFooter>
           <VStack>
-            <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9}>
+            <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9} onClick={onClose}>
               ログイン
             </PrimaryButton>
             <Text>

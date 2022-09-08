@@ -134,7 +134,7 @@ function ProfileModal({ isOpen, onClose }) {
 
         <ModalFooter justifyContent="center" mb={"100px"}>
           <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9} onClick={handleClose}>
-            ログイン
+            始める
           </PrimaryButton>
         </ModalFooter>
       </ModalContent>

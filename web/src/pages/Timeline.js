@@ -5,12 +5,14 @@ import {
   Heading,
   Button,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import { BiPlus } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { useParams, Link } from "react-router-dom";
+import PostModal from "../components/PostModal";
 
 const PostItems = [
   {
@@ -39,6 +41,11 @@ const PostItems = [
 function Timeline() {
   // paramのidはuser_idです！
   const { uid } = useParams();
+  const {
+    isOpen: isOpen,
+    onOpen: onOpen,
+    onClose: onClose,
+  } = useDisclosure();
   return (
     <>
       <div style={{ position: "fixed" }}>
@@ -69,6 +76,7 @@ function Timeline() {
           marginTop={"520px"}
           shadow={"20"}
           _hover={{ bg: "#F1873B", color: "white" }}
+          onClick={onOpen}
         >
           <IconContext.Provider value={{ color: "F1873B", size: "60px" }}>
             <BiPlus />
@@ -89,6 +97,7 @@ function Timeline() {
           ))}
         </VStack>
       </div>
+      <PostModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
