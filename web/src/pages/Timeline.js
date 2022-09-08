@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Post from "../components/Post";
+import PostModal from "../components/PostModal";
 import { BiPlus } from "react-icons/bi";
 import { IconContext } from "react-icons";
 
