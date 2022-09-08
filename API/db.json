@@ -109,14 +109,6 @@
       }
     ]
   },
-  "login": {
-    "status": "OK",
-    "user_data": {
-      "description": "ユーザーの説明文です",
-      "image_url": "http://api.kitaq.qqey.net/static/users/1.webp",
-      "isParent": 1,
-      "user_id": 1,
-      "user_name": "ほげほげ"
-    }
-  }
+  "post": []
+
 }
