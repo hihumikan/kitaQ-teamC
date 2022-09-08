@@ -1,22 +1,9 @@
-from types import NoneType
 from urllib import request
 from flask import Blueprint, request
 from models.models import Posts, Commons, Users
 import os
 
 posts_bp = Blueprint('posts_bp', __name__)
-
-
-@posts_bp.route("/post", methods=['POST'])
-def create_post():
-    if (request.cookies.get('user_id')):
-        user_id = request.cookies.get('user_id')
-
-    title = request.form['title']
-    description = request.form['description']
-    image = request.files['image']
-
-    return user_id
 
 
 @posts_bp.route("/posts/<post_id>", methods=['GET'])
