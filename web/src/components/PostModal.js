@@ -129,7 +129,6 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
                     objectFit: "contain",
                     width: "400px",
                     height: "300px",
-                    // borderRadius: "130px",
                     margin: "0 auto",
                   }}
                 />

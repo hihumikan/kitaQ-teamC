@@ -85,24 +85,25 @@ export default function OnePostPage() {
         bgColor={"white"}
         borderRadius={"3xl"}
         p={7}
+        boxShadow={"xl"}
       >
         <Flex h={"full"}>
-          <Box w={"60%"} h={""} bgColor={""} pl={"70px"}>
-            <VStack align={"start"} w={"80%"} bgColor={""}>
+          <Box w={"60%"} h={""} bgColor={""} pl={"70px"} >
+            <VStack align={"start"} w={"80%"} bgColor={""}> 
               <Text ml="auto" color={"#8C8A8A"} mr={"-20px"}>
                 2021.10.3
               </Text>
               <Box h={"30px"}></Box>
               <Image
                 src={
-                  "https://s3-alpha-sig.figma.com/img/ab88/555e/bf97db9a062b15c16368c0ad75c378de?Expires=1663545600&Signature=QwyMrfscA7V6mTNXSJCpp43kcfiBriiIhr3oZ76K0iCHh0kd8OuzcHWQRDCyObX5AYYlrwmCGi5uvZWtvArcMERrgBDRNauBwYkviJAq9ISho8eB18Ll5kEVeBCASxFKsKTy6rwEpYdIcJk36cFtUMMbOB2t9eV704157UdiPAztleDFUDTo2qRKw2sPlKszeGUDIGD6k8RJhvFCt9wOsJimY3~Xon2QQHEGRYv8PwJf3XNDvqrIFcOs5itZDa6vlA6jE1Q661pmaF0Fz4GnkVbF2o3bTJeulcEBy76OQpxy-XXAk7mCJ67TevXWV3SRSi0Yyy8WkimxuLlSlPVNCQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
+                  "https://cdn.clipkit.co/tenants/381/articles/images/000/133/901/large/0e183ddb-f1ed-4df5-902e-fdd7817adbf2.jpg?1633183765"
                 }
                 alt={""}
               />
               <Spacer></Spacer>
               <Spacer></Spacer>
               <Text bgColor="" fontSize={"30px"} mt="20px">
-                ラーメン作りました！
+                今日は...
               </Text>
               <Spacer></Spacer>
               <Text bgColor="" mt="20px" textAlign={"left"}>
