@@ -26,7 +26,7 @@ const ChatCard = () => {
             mt={"30px"}
             src="https://s3-alpha-sig.figma.com/img/4cf5/b7a9/8b8488a48edc7a28c40762e9e41de954?Expires=1663545600&Signature=aCR-1PHLZN2xMTE8MG8qAo8wgtDRK~z1dkyZM18soNv7slVduN3zRJdJvC7r8pB~hg6HbBGfju95ZNVSvPvKsvI8ZsSG4fNfWTQrps3QijGKrM5fxYKhzH6ErEWPs1tlyBV7dssB6lK72jlorXXyij4MXGUhoehZ8IsSHJguKGm5HDAGuYT-OnAl8oOV35c6rPKJDi2IW33FA2UFTgGnwQtkLBon18Ry345pfelkR6slcETFXg9aVfJhrTgp7GJIzkoMnGEUGjAx~~BtpuQBeNqKgNDSU104dGY-n-R7Sow0l~9HGQjhlOuepRV3o-gdndWihG7zT21ukDcloNFDDQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
           ></Avatar>
-          <Text w={"80%"}>むかい　ゆうき</Text>
+          <Text w={"100%"} fontSize={"2xs"}>むかい ゆうき</Text>
         </VStack>
 
         <Spacer></Spacer>
