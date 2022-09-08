@@ -21,8 +21,9 @@ function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
           ml={"6px"}
         />
         <Input
-          type="text"
-          size="md"
+          name={name}
+          type='text'
+          size='md'
           placeholder={placeholder}
           border={"none"}
           h={"full"}
@@ -33,7 +34,7 @@ function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
         />
       </InputGroup>
     </FormControl>
-  );
+  )
 }
 
-export default MyInputGroup;
+export default MyInputGroup

@@ -1,22 +1,26 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { TbCloudUpload } from "react-icons/tb";
+import { IoMdClose } from "react-icons/io";
+import { MdArrowBack } from "react-icons/md";
 import { ImageCropper } from "./ImageCropper";
+import SignupModal from "./SignupModal";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   FormControl,
   Input,
+  useDisclosure,
   Button,
   VStack,
 } from "@chakra-ui/react";
-import { PrimaryButton } from "./Button";
+import { PrimaryButton, ModalButton } from "./Button";
+import signupApi from "../api/signup";
 
-function ProfileModal({ isOpen, onClose }) {
+function ProfileModal({ isOpen, onClose, userData, setUserData }) {
   const inputRef = useRef(null);
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -36,11 +40,20 @@ function ProfileModal({ isOpen, onClose }) {
     const imageUrl = URL.createObjectURL(imageFile);
     setFileUrl(imageUrl);
   };
+  const {
+    isOpen: isOpenProfile,
+    onOpen: onOpenProfile,
+    onClose: onCloseProfile,
+  } = useDisclosure();
+  const changeModal = () => {
+    onCloseProfile();
+    // onOpen()
+  };
   const fileUpload = () => {
     console.log(inputRef.current);
     inputRef.current.click();
+    
   };
-
   const handleChangeFile = useCallback(
     (e) => {
       const file =
@@ -60,7 +73,23 @@ function ProfileModal({ isOpen, onClose }) {
   const handleClose = () => {
     setButton(true);
     onClose();
+    const data = {...userData};
+    data.file = src;
+
+    console.log(data);
+    signupApi.post(data);
+
+    // setUserData((prev) => ({
+    //   ...prev,
+    //   file: src,
+    // }));
   };
+  
+  // useEffect(()=> {
+  //   // console.log(src);
+  //   c
+  // }, [userData])
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -70,9 +99,23 @@ function ProfileModal({ isOpen, onClose }) {
       size={"3xl"}
     >
       <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
+      <ModalContent pos={"relative"}>
         <ModalBody pb={6}>
+          {/* 戻るボタンちょっとむずい */}
+          {/* <ModalButton
+            icon={<MdArrowBack />}
+            onClick={onClose}
+            pos='absolute'
+            top={'30'}
+            left={"30"}
+          ></ModalButton> */}
+          <ModalButton
+            icon={<IoMdClose />}
+            onClick={onClose}
+            pos="absolute"
+            top={"30"}
+            right={"30"}
+          ></ModalButton>
           <VStack h="100%">
             {button ? (
               <div>
@@ -122,10 +165,30 @@ function ProfileModal({ isOpen, onClose }) {
           </VStack>
           <VStack justify={"center"} spacing="24px">
             <FormControl mt={"70px"} width={"auto"}>
-              <Input variant="filled" placeholder="Name" w={"400px"} />
+              <Input
+                variant="filled"
+                placeholder="Name"
+                w={"400px"}
+                onChange={(e) => {
+                  setUserData((prev) => ({
+                    ...prev,
+                    username: e.target.value,
+                  }));
+                }}
+              />
             </FormControl>
             <FormControl mt={"100px"} width={"auto"}>
-              <Input variant="filled" placeholder="profile" w={"400px"} />
+              <Input
+                variant="filled"
+                placeholder="profile"
+                w={"400px"}
+                onChange={(e) => {
+                  setUserData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }));
+                }}
+              />
             </FormControl>
           </VStack>
         </ModalBody>
@@ -136,7 +199,9 @@ function ProfileModal({ isOpen, onClose }) {
             mr={3}
             size={"lg"}
             mb={9}
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+            }}
           >
             保存する
           </PrimaryButton>
