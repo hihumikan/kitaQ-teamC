@@ -33,7 +33,7 @@ function Post({ post }) {
         <Flex ml="auto" gap="2">
           <BsChat size={30} />
           <Text fontSize={"23px"} color={"#5B5B5B"}>
-            5
+            {post.comments}
           </Text>
         </Flex>
       </Flex>
