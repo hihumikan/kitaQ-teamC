@@ -57,7 +57,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       >
         <Box w={"full"}>
           <Heading fontSize="xl" fontWeight="bold" mb={"80px"}>
-            <Img src="./logo.png" fallbackSrc="./logo.png" />
+            <Img src="/logo.png" fallbackSrc="./logo.png" />
           </Heading>
           <VStack spacing={"7"}>
             {LinkItems.map((link) => (
