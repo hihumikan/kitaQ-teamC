@@ -25,12 +25,3 @@ services:
     command: mock -h 0.0.0.0 /openapi.yaml
     volumes:
       - ../API/openapi.yaml:/openapi.yaml
-
-  flask:
-    build: ../Backend/
-    ports:
-      - "49152:5000"
-    container_name: flask
-    volumes:
-       - ../Backend/:/usr/src/app
-    command: flask run --host=0.0.0.0

@@ -14,6 +14,7 @@ import { TbHome, TbBookmark } from "react-icons/tb";
 import Link from "./Link";
 import ProfileModal from "./ProfileModal";
 
+
 const LinkItems = [
   { name: "Home", icon: TbHome, to: "/" },
   { name: "Settings", icon: TbBookmark, to: "/timeline" },
@@ -85,6 +86,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       </Flex>
       <ProfileModal isOpen={isOpenProfile} onClose={onClosePrfile} />
     </>
+
   );
 };
 
@@ -98,6 +100,7 @@ const NavItem = ({ icon, to }) => {
       style={{ textDecoration: "none" }}
       cursor="pointer"
       transition={".2s"}
+
       _focus={{ boxShadow: "none" }}
       _hover={{
         borderRight: "2px solid #FFC2CC",
