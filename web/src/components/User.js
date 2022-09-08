@@ -16,11 +16,13 @@ export default function PostCard(props) {
         bg={useColorModeValue("white", "gray.900")}
         rounded={"lg"}
         textAlign={"center"}
-        w="298px"
-        h="389px"
+        w="290px"
+        h="380px"
         borderRadius="30"
         boxShadow={"md"}
         p={"10"}
+        transition={".4s"}
+        _hover={{ boxShadow: "sm" ,transform: "scale(1.05)"}}
       >
         <Avatar
           mt={"43px"}
