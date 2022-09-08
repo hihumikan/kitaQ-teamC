@@ -1,11 +1,20 @@
-import { Avatar, Box, Flex, Icon, Heading, VStack, Center, Img, Button   useDisclosure,
+import {
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Heading,
+  VStack,
+  Center,
+  Img,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react"
 import { TbHome, TbBookmark } from "react-icons/tb"
 import Link from "./Link"
 import { useAuth } from "../context/AuthContext"
 import { useEffect, useState } from "react"
-import ProfileModal from "./ProfileModal";
-
+import ProfileModal from "./ProfileModal"
 
 const LinkItems = [
   { name: "Home", icon: TbHome, to: "/" },
@@ -32,26 +41,22 @@ export default function Navbar({ children }) {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const user = useAuth()
-  const {
-    isOpen: isOpenProfile,
-    onOpen: onOpenProfile,
-    onClose: onClosePrfile,
-  } = useDisclosure();
+  const { isOpen: isOpenProfile, onOpen: onOpenProfile, onClose: onClosePrfile } = useDisclosure()
   return (
     <>
       <Flex
-        bg="#FFFFFF"
-        pos="fixed"
-        w="134px"
-        h="full"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
+        bg='#FFFFFF'
+        pos='fixed'
+        w='134px'
+        h='full'
+        flexDirection='column'
+        justifyContent='space-between'
+        alignItems='center'
         {...rest}
       >
         <Box w={"full"}>
-          <Heading fontSize="xl" fontWeight="bold" mb={"80px"}>
-            <Img src="/logo.png" />
+          <Heading fontSize='xl' fontWeight='bold' mb={"80px"}>
+            <Img src='/logo.png' />
           </Heading>
           <VStack spacing={"7"}>
             {LinkItems.map((link) => (
@@ -60,7 +65,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
           </VStack>
         </Box>
         <Box
-          as="button"
+          as='button'
           borderRadius={"100px"}
           marginBottom={"60px"}
           boxShadow={"2xl"}
@@ -70,23 +75,22 @@ const SidebarContent = ({ onClose, ...rest }) => {
           onClick={onOpenProfile}
         >
           {user != undefined ? (
-          <Img
-            borderRadius={"100px"}
-            width={"60px"}
-            // src={"http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"}
-            // src={user === null ? user.image_url : ""}
-            src={user.data.user_data.image_url}
-          />
-        ) : (
-          <></>
-        )}
+            <Img
+              borderRadius={"100px"}
+              width={"60px"}
+              // src={"http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"}
+              // src={user === null ? user.image_url : ""}
+              src={user.data.user_data.image_url}
+            />
+          ) : (
+            <></>
+          )}
         </Box>
       </Flex>
       <ProfileModal isOpen={isOpenProfile} onClose={onClosePrfile} />
     </>
-
-  );
-};
+  )
+}
 
 const NavItem = ({ icon, to }) => {
   return (
@@ -96,16 +100,15 @@ const NavItem = ({ icon, to }) => {
       h={"50px"}
       href='#'
       style={{ textDecoration: "none" }}
-      cursor="pointer"
+      cursor='pointer'
       transition={".2s"}
-
       _focus={{ boxShadow: "none" }}
       _hover={{
         borderRight: "2px solid #FFC2CC",
         pl: "2px",
       }}
     >
-      <Center h={"full"}>{icon && <Icon fontSize="27px" as={icon} />}</Center>
+      <Center h={"full"}>{icon && <Icon fontSize='27px' as={icon} />}</Center>
     </Link>
   )
 }
