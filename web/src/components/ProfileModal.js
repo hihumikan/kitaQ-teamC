@@ -1,7 +1,10 @@
-import { useRef, useState, useCallback } from "react";
-import { IconContext } from "react-icons";
-import { TbCloudUpload } from "react-icons/tb";
-import { ImageCropper } from "./ImageCropper";
+import { useRef, useState, useCallback } from "react"
+import { IconContext } from "react-icons"
+import { TbCloudUpload } from "react-icons/tb"
+import { IoMdClose } from "react-icons/io"
+import { MdArrowBack } from "react-icons/md"
+import { ImageCropper } from "./ImageCropper"
+import SignupModal from "./SignupModal"
 import {
   Modal,
   ModalOverlay,
@@ -11,56 +14,60 @@ import {
   ModalCloseButton,
   FormControl,
   Input,
+  IconButton,
+  useDisclosure,
   Button,
   VStack,
-} from "@chakra-ui/react";
-import { PrimaryButton } from "./Button";
+} from "@chakra-ui/react"
+import { PrimaryButton, ModalButton } from "./Button"
 
 function ProfileModal({ isOpen, onClose }) {
-  const inputRef = useRef(null);
-  const initialRef = useRef(null);
-  const finalRef = useRef(null);
+  const inputRef = useRef(null)
+  const initialRef = useRef(null)
+  const finalRef = useRef(null)
 
-  let [value, setValue] = useState("");
-  const [load, setLoad] = useState(false);
-  const [fileUrl, setFileUrl] = useState(null);
-  const previewCanvasRef = useRef(null);
-  const [src, setSrc] = useState("");
-  const [croppedFile, setCroppedFile] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [button, setButton] = useState(true);
+  let [value, setValue] = useState("")
+  const [load, setLoad] = useState(false)
+  const [fileUrl, setFileUrl] = useState(null)
+  const previewCanvasRef = useRef(null)
+  const [src, setSrc] = useState("")
+  const [croppedFile, setCroppedFile] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [button, setButton] = useState(true)
 
   const onFileInputChange = (event) => {
-    console.log(event.target.files[0]);
-    const imageFile = event.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setFileUrl(imageUrl);
-  };
+    console.log(event.target.files[0])
+    const imageFile = event.target.files[0]
+    const imageUrl = URL.createObjectURL(imageFile)
+    setFileUrl(imageUrl)
+  }
+  const { isOpen: isOpenProfile, onOpen: onOpenProfile, onClose: onCloseProfile } = useDisclosure()
+  const changeModal = () => {
+    onCloseProfile()
+    // onOpen()
+  }
   const fileUpload = () => {
-    console.log(inputRef.current);
-    inputRef.current.click();
-  };
+    console.log(inputRef.current)
+    inputRef.current.click()
+  }
 
   const handleChangeFile = useCallback(
     (e) => {
-      const file =
-        e.target.files !== null && e.target.files[0] ? e.target.files[0] : null;
+      const file = e.target.files !== null && e.target.files[0] ? e.target.files[0] : null
       if (file) {
-        const reader = new FileReader();
-        reader.addEventListener("load", () =>
-          setSrc(reader.result?.toString() || "")
-        );
-        reader.readAsDataURL(file);
-        setOpen(true);
-        setButton(false);
+        const reader = new FileReader()
+        reader.addEventListener("load", () => setSrc(reader.result?.toString() || ""))
+        reader.readAsDataURL(file)
+        setOpen(true)
+        setButton(false)
       }
     },
     [setSrc]
-  );
+  )
   const handleClose = () => {
-    setButton(true);
-    onClose();
-  };
+    setButton(true)
+    onClose()
+  }
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -70,10 +77,24 @@ function ProfileModal({ isOpen, onClose }) {
       size={"3xl"}
     >
       <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
+      <ModalContent pos={"relative"}>
         <ModalBody pb={6}>
-          <VStack h="100%">
+          {/* 戻るボタンちょっとむずい */}
+          {/* <ModalButton
+            icon={<MdArrowBack />}
+            onClick={onClose}
+            pos='absolute'
+            top={'30'}
+            left={"30"}
+          ></ModalButton> */}
+          <ModalButton
+            icon={<IoMdClose />}
+            onClick={onClose}
+            pos='absolute'
+            top={'30'}
+            right={"30"}
+          ></ModalButton>
+          <VStack h='100%'>
             {button ? (
               <div>
                 <Button
@@ -91,8 +112,8 @@ function ProfileModal({ isOpen, onClose }) {
                 <input
                   hidden
                   ref={inputRef}
-                  type="file"
-                  accept=".png,.jpg,.jpeg"
+                  type='file'
+                  accept='.png,.jpg,.jpeg'
                   onChange={handleChangeFile}
                 />
               </div>
@@ -120,29 +141,23 @@ function ProfileModal({ isOpen, onClose }) {
               </div>
             )}
           </VStack>
-          <VStack justify={"center"} spacing="24px">
+          <VStack justify={"center"} spacing='24px'>
             <FormControl mt={"70px"} width={"auto"}>
-              <Input variant="filled" placeholder="Name" w={"400px"} />
+              <Input variant='filled' placeholder='Name' w={"400px"} />
             </FormControl>
             <FormControl mt={"100px"} width={"auto"}>
-              <Input variant="filled" placeholder="profile" w={"400px"} />
+              <Input variant='filled' placeholder='profile' w={"400px"} />
             </FormControl>
           </VStack>
         </ModalBody>
 
-        <ModalFooter justifyContent="center" mb={"100px"}>
-          <PrimaryButton
-            colorScheme="blue"
-            mr={3}
-            size={"lg"}
-            mb={9}
-            onClick={handleClose}
-          >
+        <ModalFooter justifyContent='center' mb={"100px"}>
+          <PrimaryButton colorScheme='blue' mr={3} size={"lg"} mb={9} onClick={handleClose}>
             保存する
           </PrimaryButton>
         </ModalFooter>
       </ModalContent>
     </Modal>
-  );
+  )
 }
-export default ProfileModal;
+export default ProfileModal

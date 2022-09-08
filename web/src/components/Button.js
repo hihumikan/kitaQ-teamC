@@ -1,4 +1,4 @@
-import { Button, IconButton } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react"
 
 function PrimaryButton({ size, children, hoverVersion, ...rest }) {
   return (
@@ -8,8 +8,8 @@ function PrimaryButton({ size, children, hoverVersion, ...rest }) {
       px={size === "lg" ? 24 : 10}
       rounded={"full"}
       color={"white"}
-      bg="#FFC2CC"
-      boxShadow="sm"
+      bg='#FFC2CC'
+      boxShadow='sm'
       transition={".5s"}
       _hover={{ bg: "#F4BFC8", transform: "scale(1.1)" }}
       _active={{ bg: "#F4BFC8" }}
@@ -17,7 +17,7 @@ function PrimaryButton({ size, children, hoverVersion, ...rest }) {
     >
       {children}
     </Button>
-  );
+  )
 }
 
 function SecondaryButton({ size, children, ...rest }) {
@@ -28,7 +28,7 @@ function SecondaryButton({ size, children, ...rest }) {
       px={size === "lg" ? 24 : 10}
       rounded={"full"}
       color={"white"}
-      bg="#CFCCCC"
+      bg='#CFCCCC'
       transition={".5s"}
       _hover={{ bg: "#B2AEAE", transform: "scale(1.1)" }}
       _active={{ bg: "#808080" }}
@@ -36,7 +36,7 @@ function SecondaryButton({ size, children, ...rest }) {
     >
       {children}
     </Button>
-  );
+  )
 }
 
 function ModalButton({ icon, ...rest }) {
@@ -44,14 +44,14 @@ function ModalButton({ icon, ...rest }) {
     <IconButton
       w={"60px"}
       h={"60px"}
-      fontSize="30px"
+      fontSize='30px'
       icon={icon}
-      bg="white"
+      bg='white'
       shadow={"4px 4px 10px #bfbfbf"}
       rounded={"full"}
       {...rest}
     />
-  );
+  )
 }
 
-export { PrimaryButton, SecondaryButton, ModalButton };
+export { PrimaryButton, SecondaryButton, ModalButton }
