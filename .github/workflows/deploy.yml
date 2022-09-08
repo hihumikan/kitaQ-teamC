@@ -18,6 +18,6 @@ jobs:
           port: ${{secrets.SSH_PORT}}
           script: |
             cd kitaQ-teamC/
-            sudo make down
+            echo ${{secrets.SUDO_PASSWORD}} | sudo -S make down
             git pull
-            sudo make up
+            echo ${{secrets.SUDO_PASSWORD}}  | sudo -S make up
