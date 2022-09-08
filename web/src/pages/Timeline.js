@@ -63,9 +63,9 @@ function Timeline() {
           borderRadius={"60px"}
           position={"fixed"}
           marginLeft={"400px"}
-          marginTop={"520px"}
-          shadow={"20"}
-          _hover={{ bg: "#F1873B", color: "white" }}
+          marginTop={"400px"}
+          boxShadow={"xl"}
+          _hover={{ boxShadow:"sm" }}
           onClick={onOpen}
         >
           <IconContext.Provider value={{ color: "F1873B", size: "60px" }}>
