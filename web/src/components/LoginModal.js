@@ -43,7 +43,7 @@ function LoginModal({ isOpen, onClose }) {
           onClick={onClose}
           pos="absolute"
           right={"20"}
-        ></ModalButton>
+        />
         <ModalBody py={8}>
           <MyInputGroup
             name={"email"}

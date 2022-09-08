@@ -41,8 +41,6 @@ function CustomRadio({ icon, text, title, ...radioProps }) {
         borderColor={"#FFB885"}
         borderRadius={"3xl"}
         boxShadow={state.isChecked ? "" : "md"}
-        // bgColor={state.isChecked ? "#FFB885" : ""}
-        // color={state.isChecked ? "white" : ""}
       >
         <VStack>
           <TbId size={"40px"} />
@@ -87,13 +85,13 @@ function SignupModal({ isOpen, onClose }, props) {
 
   const roles = [
     {
-      role_id: 0,
+      role_id: "0",
       title: "投稿する",
       text: "自炊を投稿することで応援を受けることができます",
       icon: "https://s3-alpha-sig.figma.com/img/eef6/5a39/353d7ba42dfb1f0e6026b4d15d55faee?Expires=1663545600&Signature=c9NrzDg~UgYtYHOFjZRCD86X4vEuGqufb4Qwt9RxAuB7ek-n1hFTMjXYr7jPt1AEDQgK5FW-FfngeINxtoEf~1YgXwguHaT~KLJtrD0wR-mElNWg720YJRuS4gNlvowz-aC9Rjz0o92s2LvRnfuEju1PVo~HlRErBuvZgtS8Yp~YNPd0FGXAzL~6MabX9-K~qUe9kpkn6sV3TNLdMJUrma9HSqD20lN0JDv6IY93Md6XZsV3s5Pg~pUt13GcZ290ZzP0zen7kkKvs~j0keWLvFL5bDPQRQTB~3I83Uc2gZ0BCYaTlQlaHOOuCrXnu~Xig-ho~7PbsennSmuT6qo1QQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
     },
     {
-      role_id: 1,
+      role_id: "1",
       title: "応援する",
       text: "自炊を頑張っている人をコメントで応援することができます",
       icon: "https://s3-alpha-sig.figma.com/img/eef6/5a39/353d7ba42dfb1f0e6026b4d15d55faee?Expires=1663545600&Signature=c9NrzDg~UgYtYHOFjZRCD86X4vEuGqufb4Qwt9RxAuB7ek-n1hFTMjXYr7jPt1AEDQgK5FW-FfngeINxtoEf~1YgXwguHaT~KLJtrD0wR-mElNWg720YJRuS4gNlvowz-aC9Rjz0o92s2LvRnfuEju1PVo~HlRErBuvZgtS8Yp~YNPd0FGXAzL~6MabX9-K~qUe9kpkn6sV3TNLdMJUrma9HSqD20lN0JDv6IY93Md6XZsV3s5Pg~pUt13GcZ290ZzP0zen7kkKvs~j0keWLvFL5bDPQRQTB~3I83Uc2gZ0BCYaTlQlaHOOuCrXnu~Xig-ho~7PbsennSmuT6qo1QQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
@@ -130,41 +128,63 @@ function SignupModal({ isOpen, onClose }, props) {
         size="3xl"
       >
         <ModalOverlay />
-        <ModalContent alignItems={"center"} py={"64px"}>
-          <ModalHeader fontSize={"2xl"}>アカウントを作成する</ModalHeader>
+        <ModalContent alignItems={"center"} py={"56px"}>
+          <ModalHeader fontSize={"2xl"} padding={"0"} mb={"10"}>
+            アカウントを作成する
+          </ModalHeader>
           <ModalButton
             icon={<IoMdClose />}
             onClick={onClose}
             pos="absolute"
-            right={"20"}
-          ></ModalButton>
-          <ModalBody py={8}>
-            <Text>The selected radio is: {value}</Text>
-            <HStack>
+            right={"72px"}
+          />
+          <ModalBody mb={"8"} padding={"0"}>
+            <Flex justifyContent={"space-between"} gap={"4"} mb={"12"}>
               {roles.map((role) => {
                 return (
-                  <CustomRadio
-                    key={role.title}
-                    title={role.title}
-                    text={role.text}
-                    {...getRadioProps({ value: role.title })}
-                    onClick={(e) => {
+                  <Flex
+                    px={"4"}
+                    py={"6"}
+                    flex={"1"}
+                    key={role.role_id}
+                    flexDirection={"column"}
+                    alignItems={"center"}
+                    gap={"3"}
+                    borderRadius={"3xl"}
+                    transition={"all 0.5s"}
+                    border={
+                      role.role_id === userData.isparent
+                        ? "2px solid #ff99a8"
+                        : "2px solid #e6e6e6"
+                    }
+                    bg={role.role_id === userData.isparent ? "#ffe9e9" : ""}
+                    onClick={() => {
                       setUserData((prev) => ({
                         ...prev,
                         isparent: role.role_id,
                       }));
                     }}
-                  />
+                  >
+                    <TbId size={"40px"} />
+                    <Text fontWeight={"bold"}>{role.title}</Text>
+                    <Text
+                      w={"90%"}
+                      px={3}
+                      textAlign={"center"}
+                      fontSize={"10px"}
+                    >
+                      {role.text}
+                    </Text>
+                  </Flex>
                 );
               })}
-            </HStack>
-            <Box h={"20px"}></Box>
-            <VStack w={"20%"} align={"center"}>
+            </Flex>
+            <Flex flexDirection={"column"} gap={"6"}>
               <MyInputGroup
-                pl={"45px"}
                 name={"email"}
                 icon={<MdOutlinePerson color="gray.800" />}
                 placeholder={"メールアドレス"}
+                w={"full"}
                 onChange={(e) => {
                   setUserData((prev) => ({
                     ...prev,
@@ -173,7 +193,6 @@ function SignupModal({ isOpen, onClose }, props) {
                 }}
               />
               <MyInputGroup
-                pl={"45px"}
                 name={"password"}
                 icon={<MdLockOutline color="gray.800" />}
                 placeholder={"パスワード"}
@@ -184,7 +203,7 @@ function SignupModal({ isOpen, onClose }, props) {
                   }));
                 }}
               />
-            </VStack>
+            </Flex>
           </ModalBody>
 
           <ModalFooter>

@@ -1,4 +1,4 @@
-import { Center, HStack, Box, Input } from "@chakra-ui/react";
+import { Center, HStack, Box, Input, Textarea } from "@chakra-ui/react";
 import { FiSend } from "react-icons/fi";
 import axios from "axios";
 
@@ -22,7 +22,7 @@ function ChatInput({ id, comment, setComment }) {
       zIndex={4}
     >
       <HStack align={"end"}>
-        <Box
+        <Textarea
           borderRadius={"2xl"}
           border={"1px"}
           borderColor={"#9E9E9E"}
@@ -30,14 +30,10 @@ function ChatInput({ id, comment, setComment }) {
           w={"350px"}
           p={4}
           mr={"10px"}
-        >
-          <Input
-            variant="unstyled"
-            placeholder="コメントを残す"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-        </Box>
+          placeholder="コメントを残す"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
         <FiSend
           size={"30px"}
           cursor={"pointer"}

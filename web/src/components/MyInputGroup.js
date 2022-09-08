@@ -6,7 +6,7 @@ import {
 } from "@chakra-ui/react";
 function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
   return (
-    <FormControl id={name} {...rest}>
+    <FormControl id={name} {...rest} justifyContent={"center"} display={"flex"}>
       <InputGroup
         backgroundColor={"#F0F0F0"}
         w={"400px"}
@@ -22,8 +22,8 @@ function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
         />
         <Input
           name={name}
-          type='text'
-          size='md'
+          type="text"
+          size="md"
           placeholder={placeholder}
           border={"none"}
           h={"full"}
@@ -34,7 +34,7 @@ function MyInputGroup({ name, icon, placeholder, value, setValue, ...rest }) {
         />
       </InputGroup>
     </FormControl>
-  )
+  );
 }
 
-export default MyInputGroup
+export default MyInputGroup;
