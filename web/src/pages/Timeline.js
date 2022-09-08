@@ -19,15 +19,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Timeline() {
-
   const { id } = useParams();
   const [posts, setPosts] = useState([]);
-  const {
-    isOpen: isOpen,
-    onOpen: onOpen,
-    onClose: onClose,
-  } = useDisclosure();
-  
+  const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`http://localhost:3001/users${id}`);
@@ -35,7 +30,7 @@ function Timeline() {
     };
     fetchData();
   }, []);
-  
+
   return (
     <>
       <div style={{ position: "fixed" }}>
@@ -88,7 +83,12 @@ function Timeline() {
           ))}
         </VStack>
       </div>
-      <PostModal isOpen={isOpen} onClose={onClose} />
+      <PostModal
+        isOpen={isOpen}
+        onClose={onClose}
+        posts={posts}
+        setPosts={setPosts}
+      />
     </>
   );
 }
