@@ -3,7 +3,7 @@ import mysql.connector
 
 def conn_db():
     conn = mysql.connector.connect(
-        host='mysql',  # dev:localhost
+        host='mysql',
         user='root',
         passwd='root_password',
         db='db'
@@ -144,6 +144,7 @@ class Posts:
         cursor = conn.cursor()
         sql = "SELECT id,post_id,user_id,comment,created_at FROM comments WHERE post_id = " + \
             str(post_id) + ";"
+        print(sql)
         try:
             cursor.execute(sql)
             return cursor.fetchall()
@@ -151,7 +152,6 @@ class Posts:
             return None
 
     def post_comment(self, id, user_id, comment) -> list:
-        print("sql")
         conn = conn_db()
         cursor = conn.cursor()
         sql = "INSERT INTO comments (post_id,user_id,comment) VALUES('" + \
@@ -167,6 +167,31 @@ class Posts:
             cursor.close
             conn.close
             return result
+        except:
+            cursor.close
+            conn.close
+            return False
+
+    def comment_user_get(self, id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "SELECT user_id FROM comments WHERE id = " + str(id) + ";"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close
+        conn.close
+        return result
+
+    def delete_comment(self, id) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        try:
+            sql = "DELETE FROM comments WHERE id = " + str(id) + ";"
+            cursor.execute(sql)
+            conn.commit()
+            cursor.close
+            conn.close
+            return True
         except:
             cursor.close
             conn.close
