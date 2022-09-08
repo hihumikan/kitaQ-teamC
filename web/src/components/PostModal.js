@@ -74,7 +74,9 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
     };
     setPosts([newPost, ...posts]);
     setTitle("");
+    setButton(true)
     setDescription("");
+    console.log(newPost);
     onClose();
   };
 

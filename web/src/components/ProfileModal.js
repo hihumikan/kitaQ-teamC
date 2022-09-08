@@ -11,10 +11,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   FormControl,
   Input,
-  IconButton,
   useDisclosure,
   Button,
   VStack,
@@ -54,8 +52,8 @@ function ProfileModal({ isOpen, onClose, userData, setUserData }) {
   const fileUpload = () => {
     console.log(inputRef.current);
     inputRef.current.click();
+    
   };
-
   const handleChangeFile = useCallback(
     (e) => {
       const file =
@@ -75,7 +73,23 @@ function ProfileModal({ isOpen, onClose, userData, setUserData }) {
   const handleClose = () => {
     setButton(true);
     onClose();
+    const data = {...userData};
+    data.file = src;
+
+    console.log(data);
+    signupApi.post(data);
+
+    // setUserData((prev) => ({
+    //   ...prev,
+    //   file: src,
+    // }));
   };
+  
+  // useEffect(()=> {
+  //   // console.log(src);
+  //   c
+  // }, [userData])
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -187,12 +201,6 @@ function ProfileModal({ isOpen, onClose, userData, setUserData }) {
             mb={9}
             onClick={() => {
               handleClose();
-              setUserData((prev) => ({
-                ...prev,
-                file: src,
-              }));
-              console.log(userData);
-              signupApi.post(userData);
             }}
           >
             保存する
