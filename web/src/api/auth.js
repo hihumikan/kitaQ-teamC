@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ENDPOINT_URL = "http://localhost:3001/login";
+const ENDPOINT_URL = "http://api.kitaq.qqey.net/login";
 
 const authApi = {
   async get() {
@@ -8,8 +8,8 @@ const authApi = {
     return result.data;
   },
   async post(user) {
-    const result = await axios.get(ENDPOINT_URL);
-    // const result = await axios.post(ENDPOINT_URL, user);
+    // const result = await axios.get(ENDPOINT_URL);
+    const result = await axios.post(ENDPOINT_URL, user);
     return result.data;
   },
   async delete(user) {
