@@ -14,7 +14,7 @@ export default function HomePage() {
       <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
         {users.map((user) => {
           return (
-            <Link to={`/timeline/${user.user_id}`}>
+            <Link to={`/timeline/${user.user_id}`} key={user.user_id}>
               <Box
                 _hover={{
                   textDecoration: "none",
