@@ -9,7 +9,7 @@ const authApi = {
   },
   async post(user) {
     // const result = await axios.get(ENDPOINT_URL);
-    const result = await axios.post(ENDPOINT_URL, user);
+    const result = await axios.post(ENDPOINT_URL, user, { withCredentials: true })
     return result.data;
   },
   async delete(user) {
