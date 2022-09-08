@@ -1,8 +1,10 @@
 from flask import Flask
 from controller.users import users_bp
+from controller.posts import posts_bp
 
 app = Flask(__name__)
 app.register_blueprint(users_bp)
+app.register_blueprint(posts_bp)
 
 
 @app.route("/")
