@@ -3,9 +3,9 @@ import { Button, IconButton } from "@chakra-ui/react";
 function PrimaryButton({ size, children, ...rest }) {
   return (
     <Button
-      h={size === "lg" ? "72px" : "48px"}
+      h={size === "lg" ? "72px" : "40px"}
       fontSize={size === "lg" ? "2xl" : "md"}
-      px={size === "lg" ? 24 : 12}
+      px={size === "lg" ? 24 : 10}
       rounded={"full"}
       color={"white"}
       bg="#F1873B"
@@ -21,9 +21,9 @@ function PrimaryButton({ size, children, ...rest }) {
 function SecondaryButton({ size, children, ...rest }) {
   return (
     <Button
-      h={size === "lg" ? "72px" : "48px"}
+      h={size === "lg" ? "72px" : "40px"}
       fontSize={size === "lg" ? "2xl" : "md"}
-      px={size === "lg" ? 24 : 12}
+      px={size === "lg" ? 24 : 10}
       rounded={"full"}
       color={"white"}
       bg="#9B9B9B"

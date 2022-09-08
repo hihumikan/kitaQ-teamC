@@ -1,12 +1,7 @@
 import "react-image-crop/dist/ReactCrop.css";
 
 import styled from "@emotion/styled";
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import ReactCrop, {
   centerCrop,
@@ -113,16 +108,13 @@ const CropperBox = styled.div`
   margin-bottom: 15px;
 `;
 
-function centerAspectCrop(
-  mediaWidth,
-  mediaHeight,
-  aspect
-) {
+function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   return centerCrop(
     makeAspectCrop(
       {
-        unit: "%",
-        width: 90,
+        unit: "px",
+        width: 130,
+        height: 130,
       },
       aspect,
       mediaWidth,

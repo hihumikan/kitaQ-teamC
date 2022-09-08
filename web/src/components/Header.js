@@ -25,8 +25,8 @@ function Header({ children }) {
       >
         {children}
         <ButtonGroup gap={"15px"}>
-          <SecondaryButton onClick={onOpen1}>log in</SecondaryButton>
-          <PrimaryButton onClick={onOpen2}>sign up</PrimaryButton>
+          <SecondaryButton onClick={onOpen1}>ログイン</SecondaryButton>
+          <PrimaryButton onClick={onOpen2}>サインイン</PrimaryButton>
         </ButtonGroup>
       </HStack>
       <LoginModal isOpen={isOpen1} onClose={onClose1} />

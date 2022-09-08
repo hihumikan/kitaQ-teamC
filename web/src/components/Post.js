@@ -1,5 +1,13 @@
-import { Box, Button, Flex, Heading, HStack, Text } from "@chakra-ui/react"
-import { BsChat } from "react-icons/bs"
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  Spacer,
+} from "@chakra-ui/react";
+import { BsChat } from "react-icons/bs";
 
 function Post({ post }) {
   return (
@@ -7,27 +15,30 @@ function Post({ post }) {
       <Flex
         flexDirection={"column"}
         alignItems={"flex-start"}
-        bg='#FFFFFF'
+        bg="#FFFFFF"
         rounded={"29px"}
-        p={"20"}
+        p={"10"}
         maxW={"642px"}
         gap={"36px"}
+        boxShadow={"md"}
       >
-        <Text ml='auto' color={"#8C8A8A"}>
+        <Text ml="auto" color={"#8C8A8A"}>
           {post.created_at}
         </Text>
         <img src={post.image_url} alt={post.image_alt} />
-        <Text size='lg'>{post.title}</Text>
-        <Text>{post.description}</Text>
-      </Flex>
-      <HStack position='absolute' bottom={10} right={10}>
-        <BsChat size={30} />
-        <Text fontSize={"23px"} color={"#5B5B5B"}>
-          5
+        <Text as="b" fontSize="2xl">
+          {post.title}
         </Text>
-      </HStack>
+        <Text>{post.description}</Text>
+        <Flex ml="auto" gap="2">
+          <BsChat size={30} />
+          <Text fontSize={"23px"} color={"#5B5B5B"}>
+            5
+          </Text>
+        </Flex>
+      </Flex>
     </Box>
-  )
+  );
 }
 
-export default Post
+export default Post;

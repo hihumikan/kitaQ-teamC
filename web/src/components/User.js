@@ -3,13 +3,15 @@ import {
   Center,
   Avatar,
   useColorModeValue,
-  Text
+  Text,
+  Flex,
+  VStack,
 } from "@chakra-ui/react";
 
 export default function PostCard(props) {
   return (
     <Center py={0}>
-      <Box
+      <VStack
         maxW={"320px"}
         bg={useColorModeValue("white", "gray.900")}
         rounded={"lg"}
@@ -17,6 +19,8 @@ export default function PostCard(props) {
         w="298px"
         h="389px"
         borderRadius="30"
+        boxShadow={"md"}
+        p={"10"}
       >
         <Avatar
           mt={"43px"}
@@ -25,13 +29,14 @@ export default function PostCard(props) {
           alt={"Avatar Alt"}
           pos={"relative"}
         />
-        <Text fontSize={"2xl"} fontFamily={"body"} my="38">
+        <br />
+        <Text fontSize={"2xl"} my="38" as="b">
           {props.name}
         </Text>
         <Box noOfLines={3} px="6">
           {props.description}
         </Box>
-      </Box>
+      </VStack>
     </Center>
   );
 }
