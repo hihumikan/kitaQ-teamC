@@ -26,7 +26,7 @@ function Post({ post }) {
         <Text ml="auto" color={"#8C8A8A"}>
           {post.created_at}
         </Text>
-        <img src={post.image_url} alt={post.image_alt} />
+        <img src={post.file} alt={post.image_alt} />
         <Text as="b" fontSize="2xl">
           {post.title}
         </Text>
