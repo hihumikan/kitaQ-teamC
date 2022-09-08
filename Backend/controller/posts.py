@@ -130,7 +130,7 @@ def post():
         return {"status": "NG"}, 500
 
 
-@posts_bp.route("/post/<post_id>", methods=['DELETE'])
+@posts_bp.route("/posts/<post_id>", methods=['DELETE'])
 def post_del(post_id):
     com = Commons()
     db = Posts()
