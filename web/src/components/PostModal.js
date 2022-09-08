@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { IconContext } from "react-icons";
 import { TbCloudUpload } from "react-icons/tb";
 import { ImageCropper } from "./ImageCropper";
@@ -16,13 +16,15 @@ import {
   Img,
 } from "@chakra-ui/react";
 import { PrimaryButton, ModalButton } from "./Button";
+import axios from "axios";
 
-function ProfileModal({ isOpen, onClose }) {
+function ProfileModal({ isOpen, onClose, posts, setPosts }) {
   const inputRef = useRef(null);
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
-  let [value, setValue] = useState("");
+  let [title, setTitle] = useState("");
+  let [description, setDescription] = useState("");
   const [load, setLoad] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
   const previewCanvasRef = useRef(null);
@@ -54,15 +56,28 @@ function ProfileModal({ isOpen, onClose }) {
         reader.readAsDataURL(file);
         setOpen(true);
         setButton(false);
-
       }
     },
     [setSrc]
   );
-    const handleClose=()=>{
-      setButton(true)
-      onClose()
-    }
+
+  const postHandler = async () => {
+    const newPost = {
+      post_id: 3,
+      created_at: Date.now(),
+      image_url: src,
+      image_alt: "画像の説明文",
+      title: title,
+      description: description,
+    };
+    setPosts([newPost, ...posts]);
+    setLoad(false);
+    setTitle("");
+    setDescription("");
+    setSrc("");
+    onClose();
+  };
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -99,16 +114,16 @@ function ProfileModal({ isOpen, onClose }) {
                 />
               </div>
             ) : (
-              <div style={{marginTop:"80px"}}>
+              <div style={{ marginTop: "80px" }}>
                 <canvas
                   ref={previewCanvasRef}
                   style={{
-                    display:"flex",
+                    display: "flex",
                     objectFit: "contain",
                     width: "130px",
                     height: "130px",
                     borderRadius: "130px",
-                    margin: "0 auto"
+                    margin: "0 auto",
                   }}
                 />
                 <ImageCropper
@@ -124,16 +139,34 @@ function ProfileModal({ isOpen, onClose }) {
           </VStack>
           <VStack justify={"center"} spacing="24px">
             <FormControl mt={"70px"} width={"auto"}>
-              <Input variant="filled" placeholder="タイトル" w={"400px"} />
+              <Input
+                variant="filled"
+                placeholder="タイトル"
+                w={"400px"}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </FormControl>
             <FormControl mt={"100px"} width={"auto"}>
-              <Input variant="filled" placeholder="概要" w={"400px"} />
+              <Input
+                variant="filled"
+                placeholder="概要"
+                w={"400px"}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
             </FormControl>
           </VStack>
         </ModalBody>
 
         <ModalFooter justifyContent="center" mb={"100px"}>
-          <PrimaryButton colorScheme="blue" mr={3} size={"lg"} mb={9} onClick={handleClose}>
+          <PrimaryButton
+            colorScheme="blue"
+            mr={3}
+            size={"lg"}
+            mb={9}
+            onClick={postHandler}
+          >
             投稿する
           </PrimaryButton>
         </ModalFooter>
