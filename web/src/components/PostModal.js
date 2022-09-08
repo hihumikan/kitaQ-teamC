@@ -71,10 +71,8 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
       description: description,
     };
     setPosts([newPost, ...posts]);
-    setLoad(false);
     setTitle("");
     setDescription("");
-    setSrc("");
     onClose();
   };
 
