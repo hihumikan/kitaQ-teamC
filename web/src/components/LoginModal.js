@@ -15,10 +15,17 @@ import { TbLock } from "react-icons/tb";
 import { PrimaryButton, ModalButton } from "./Button";
 import Link from "./Link";
 import MyInputGroup from "./MyInputGroup";
+import authApi from "../api/auth";
+import { useState } from "react";
+import { useDispatchAuth } from "../context/AuthContext";
 
 function LoginModal({ isOpen, onClose }) {
   const initialRef = useRef(null);
   const finalRef = useRef(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatchAuth();
+
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -43,18 +50,36 @@ function LoginModal({ isOpen, onClose }) {
             icon={<MdOutlinePerson color="gray.800" />}
             placeholder={"メールアドレス"}
             mb={9}
+            value={email}
+            setValue={setEmail}
           />
           <MyInputGroup
             name={"password"}
             icon={<TbLock color="gray.800" />}
             placeholder={"パスワード"}
             mb={9}
+            value={password}
+            setValue={setPassword}
           />
         </ModalBody>
 
         <ModalFooter>
           <VStack>
-            <PrimaryButton mr={3} size={"lg"} mb={9} onClick={onClose}>
+            <PrimaryButton
+              colorScheme="blue"
+              mr={3}
+              size={"lg"}
+              mb={9}
+              onClick={() => {
+                authApi.post({ email, password }).then((res) => {
+                  dispatch({ type: "auth/login", user: res.data.user_data });
+                  // console.log(res);
+                });
+                setEmail("");
+                setPassword("");
+                onClose();
+              }}
+            >
               ログイン
             </PrimaryButton>
             <Text>
