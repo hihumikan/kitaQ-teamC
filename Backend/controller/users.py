@@ -92,7 +92,7 @@ def user_reg():
         file = request.files['file']
         description = request.form['description']
     except:
-        return {"status": "NG"}
+        return {"status": "NG"}, 401
 
     try:
         result = db.user_reg(user_name, email, password, isParent, description)
