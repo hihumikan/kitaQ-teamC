@@ -18,7 +18,13 @@ const LinkItems = [
 
 export default function Navbar({ children }) {
   return (
-    <Box minH="100vh" bg="#F8F8F8">
+    <Box
+      minH="100vh"
+      bg="#F8F8F8"
+      bgImage={"/bg_image.png"}
+      bgRepeat={"no-repeat"}
+      bgSize={"cover"}
+    >
       <SidebarContent />
       <Box ml="134px" p={"10"}>
         {children}
@@ -47,7 +53,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
           fontWeight="bold"
           mb={"130px"}
         >
-          <Img src="./logo.png"/>
+          <Img src="./logo.png" />
         </Heading>
         <VStack spacing={"3"}>
           {LinkItems.map((link) => (
@@ -58,7 +64,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       <Avatar
         size="md"
         src={
-          "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+          "http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"
         }
       />
     </Flex>

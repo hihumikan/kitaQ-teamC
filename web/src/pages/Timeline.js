@@ -1,18 +1,25 @@
-import { Avatar, Center, VStack, Heading, Button } from "@chakra-ui/react"
-import Header from "../components/Header"
-import Post from "../components/Post"
-import { BiPlus } from "react-icons/bi"
-import { IconContext } from "react-icons"
-import { useParams, Link } from "react-router-dom"
+import {
+  Avatar,
+  Center,
+  VStack,
+  Heading,
+  Button,
+  Text,
+} from "@chakra-ui/react";
+import Header from "../components/Header";
+import Post from "../components/Post";
+import { BiPlus } from "react-icons/bi";
+import { IconContext } from "react-icons";
+import { useParams, Link } from "react-router-dom";
 
 const PostItems = [
   {
     id: 1,
     user_id: 1,
-    title: "ラーメン作りました！",
-    description: "This is the first post",
+    title: "久しぶりの自炊！",
+    description: "最近自炊をしてなかったので、スーパーに行ってきました",
     image_url:
-      "https://s3-alpha-sig.figma.com/img/ab88/555e/bf97db9a062b15c16368c0ad75c378de?Expires=1663545600&Signature=QwyMrfscA7V6mTNXSJCpp43kcfiBriiIhr3oZ76K0iCHh0kd8OuzcHWQRDCyObX5AYYlrwmCGi5uvZWtvArcMERrgBDRNauBwYkviJAq9ISho8eB18Ll5kEVeBCASxFKsKTy6rwEpYdIcJk36cFtUMMbOB2t9eV704157UdiPAztleDFUDTo2qRKw2sPlKszeGUDIGD6k8RJhvFCt9wOsJimY3~Xon2QQHEGRYv8PwJf3XNDvqrIFcOs5itZDa6vlA6jE1Q661pmaF0Fz4GnkVbF2o3bTJeulcEBy76OQpxy-XXAk7mCJ67TevXWV3SRSi0Yyy8WkimxuLlSlPVNCQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+      "https://dol.ismcdn.jp/mwimgs/0/c/1080m/img_0c3c361d8de37f34ae80b8bf60a09fc7198652.jpg",
     image_alt: "image 1",
     created_at: "2021.10.3",
     updated_at: "2021.10.3",
@@ -20,39 +27,42 @@ const PostItems = [
   {
     id: 2,
     user_id: 1,
-    title: "Post 2",
+    title: "今日は...",
     description: "This is the second post",
-    image_url: "https://bit.ly/2Z4KKcF",
+    image_url:
+      "https://cdn.clipkit.co/tenants/381/articles/images/000/133/901/large/0e183ddb-f1ed-4df5-902e-fdd7817adbf2.jpg?1633183765",
     image_alt: "image 1",
-    created_at: "2021-05-01T00:00:00.000Z",
-    updated_at: "2021-05-01T00:00:00.000Z",
+    created_at: "2021.10.1",
+    updated_at: "2021.10.1",
   },
-]
+];
 function Timeline() {
   // paramのidはuser_idです！
-  const { uid } = useParams()
+  const { uid } = useParams();
   return (
     <>
       <div style={{ position: "fixed" }}>
         <Header>
           <Center>
             <Avatar
-              size='md'
+              size="md"
               mr={"16px"}
               src={
-                "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                "http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"
               }
             />
-            <Heading size={"lg"}>username</Heading>
+            <Text as="b" fontSize="3xl">
+              加藤 恵吾
+            </Text>
           </Center>
         </Header>
       </div>
       <div>
         <Button
           color={"black"}
-          bg='white'
-          height='170px'
-          width='170px'
+          bg="white"
+          height="170px"
+          width="170px"
           borderRadius={"60px"}
           position={"fixed"}
           marginLeft={"400px"}
@@ -64,7 +74,7 @@ function Timeline() {
             <BiPlus />
           </IconContext.Provider>
         </Button>
-        <VStack spacing={"75px"}>
+        <VStack spacing={"75px"} mr={"40px"} mt={"80px"}>
           {PostItems.map((post) => (
             <Link
               _hover={{
@@ -80,6 +90,6 @@ function Timeline() {
         </VStack>
       </div>
     </>
-  )
+  );
 }
-export default Timeline
+export default Timeline;
