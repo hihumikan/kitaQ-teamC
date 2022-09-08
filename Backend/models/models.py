@@ -151,6 +151,26 @@ class Posts:
         except:
             return None
 
+    def post(self, user_id, title, description) -> list:
+        conn = conn_db()
+        cursor = conn.cursor()
+        sql = "INSERT INTO posts (user_id,title,description) VALUES(" + \
+            str(user_id) + ",'" + str(title) + \
+            "','" + str(description) + "');"
+        try:
+            cursor.execute(sql)
+            conn.commit()
+            sql = "SELECT LAST_INSERT_ID();"
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            cursor.close
+            conn.close
+            return result
+        except:
+            cursor.close
+            conn.close
+            return False
+
     def post_comment(self, id, user_id, comment) -> list:
         conn = conn_db()
         cursor = conn.cursor()
@@ -159,8 +179,8 @@ class Posts:
         print(sql)
 
         try:
-            print(cursor.execute(sql))
-            print(conn.commit())
+            cursor.execute(sql)
+            conn.commit()
             sql = "SELECT LAST_INSERT_ID();"
             cursor.execute(sql)
             result = cursor.fetchall()
