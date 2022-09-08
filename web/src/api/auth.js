@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ENDPOINT_URL = "http://api.kitaq.qqey.net/login";
+const ENDPOINT_URL = "https://api.kitaq.qqey.net/login";
 
 const authApi = {
   async get() {
