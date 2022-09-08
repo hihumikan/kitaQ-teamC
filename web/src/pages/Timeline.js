@@ -26,7 +26,7 @@ function Timeline() {
     };
     fetchData();
   }, []);
-
+  
   return (
     <>
       <div style={{ position: "fixed" }}>
