@@ -8,7 +8,9 @@ const signupApi = {
     return result.data;
   },
   async post(user_data) {
-    const result = await axios.post(ENDPOINT_URL, user_data);
+    const result = await axios.post(ENDPOINT_URL, user_data, {
+      withCredentials: true,
+    });
     return result.data;
   },
   async delete(user) {
