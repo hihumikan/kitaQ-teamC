@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import { IconContext } from "react-icons";
 import { TbCloudUpload } from "react-icons/tb";
 import { ImageCropper } from "./ImageCropper";
@@ -10,15 +10,13 @@ import {
   ModalContent,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   FormControl,
   Input,
   Button,
   VStack,
-  Img,
+  Textarea,
 } from "@chakra-ui/react";
 import { PrimaryButton, ModalButton } from "./Button";
-import axios from "axios";
 import postApi from "../api/post";
 
 function ProfileModal({ isOpen, onClose, posts, setPosts }) {
@@ -28,20 +26,12 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
 
   let [title, setTitle] = useState("");
   let [description, setDescription] = useState("");
-  const [load, setLoad] = useState(false);
-  const [fileUrl, setFileUrl] = useState(null);
   const previewCanvasRef = useRef(null);
   const [src, setSrc] = useState("");
-  const [croppedFile, setCroppedFile] = useState(null);
+  const [, setCroppedFile] = useState(null);
   const [open, setOpen] = useState(false);
   const [button, setButton] = useState(true);
 
-  const onFileInputChange = (event) => {
-    console.log(event.target.files[0]);
-    const imageFile = event.target.files[0];
-    const imageUrl = URL.createObjectURL(imageFile);
-    setFileUrl(imageUrl);
-  };
   const fileUpload = () => {
     console.log(inputRef.current);
     inputRef.current.click();
@@ -73,7 +63,7 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
     postApi.post(newPost);
     setPosts([newPost, ...posts]);
     setTitle("");
-    setButton(true)
+    setButton(true);
     setDescription("");
     console.log(newPost);
     onClose();
@@ -96,7 +86,6 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
           right={"20"}
           top={"10"}
         ></ModalButton>
-        {/* <ModalCloseButton /> */}
         <ModalBody pb={6}>
           <VStack h="100%">
             {button ? (
@@ -155,7 +144,7 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
               />
             </FormControl>
             <FormControl mt={"100px"} width={"auto"}>
-              <Input
+              <Textarea
                 variant="filled"
                 placeholder="概要"
                 w={"400px"}
@@ -181,4 +170,5 @@ function ProfileModal({ isOpen, onClose, posts, setPosts }) {
     </Modal>
   );
 }
+
 export default ProfileModal;
