@@ -32,22 +32,22 @@ function Timeline() {
 
   return (
     <>
-      <div style={{ position: "fixed" }}>
-        <Header>
-          <Center>
-            <Avatar
-              size="md"
-              mr={"16px"}
-              src={
-                "http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"
-              }
-            />
-            <Text as="b" fontSize="3xl">
-              加藤 恵吾
-            </Text>
-          </Center>
-        </Header>
-      </div>
+      {/* <div style={{ position: "fixed" }}> */}
+      <Header>
+        <Center>
+          <Avatar
+            size="md"
+            mr={"16px"}
+            src={
+              "http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"
+            }
+          />
+          <Text as="b" fontSize="3xl">
+            加藤 恵吾
+          </Text>
+        </Center>
+      </Header>
+      {/* </div> */}
       <div>
         <Button
           bg={"white"}

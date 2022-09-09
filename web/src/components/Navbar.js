@@ -9,33 +9,35 @@ import {
   Img,
   Button,
   useDisclosure,
-} from "@chakra-ui/react"
-import { TbHome, TbBookmark } from "react-icons/tb"
-import Link from "./Link"
-import { useAuth } from "../context/AuthContext"
-import { useEffect, useState } from "react"
-import ProfileModal from "./ProfileModal"
+} from "@chakra-ui/react";
+import { TbHome, TbBookmark } from "react-icons/tb";
+import Link from "./Link";
+import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from "react";
+import ProfileModal from "./ProfileModal";
+import MobileNavbar from "./MobileNavbar";
 
 export default function Navbar({ children }) {
   return (
     <Box
-      minH='100vh'
-      bg='#F8F8F8'
+      minH="100vh"
+      w={"100vw"}
+      bg="#F8F8F8"
       bgImage={"/bg_image.png"}
       bgRepeat={"no-repeat"}
       bgSize={"cover"}
     >
-      {/* {console.log(user)} */}
-      <SidebarContent />
-      <Box ml='134px' p={"10"}>
+      <SidebarContent display={{ base: "none", md: "flex" }} />
+      <MobileNavbar display={{ base: "block", md: "none" }} />
+      <Box ml={{ base: "0", md: "134px" }} p={"10"} minH={"100vh"}>
         {children}
       </Box>
     </Box>
-  )
+  );
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
-  const user = useAuth()
+  const user = useAuth();
   const LinkItems = [
     { name: "Home", icon: TbHome, to: "/" },
     {
@@ -43,31 +45,43 @@ const SidebarContent = ({ onClose, ...rest }) => {
       icon: TbBookmark,
       to: `/timeline/${user != undefined ? user.user_id : ""}`,
     },
-  ]
-  const { isOpen: isOpenProfile, onOpen: onOpenProfile, onClose: onClosePrfile } = useDisclosure()
+  ];
+  const {
+    isOpen: isOpenProfile,
+    onOpen: onOpenProfile,
+    onClose: onClosePrfile,
+  } = useDisclosure();
   return (
     <>
       <Flex
-        bg='#FFFFFF'
-        pos='fixed'
-        w='134px'
-        h='full'
-        flexDirection='column'
-        justifyContent='space-between'
-        alignItems='center'
+        bg="#FFFFFF"
+        pos="fixed"
+        w="134px"
+        h="full"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems="center"
         {...rest}
       >
         <Box w={"full"}>
-          <Heading fontSize='xl' fontWeight='bold' mb={"80px"}>
-            <Img src='/logo.png' />
+          <Heading fontSize="xl" fontWeight="bold" mb={"80px"}>
+            <Img src="/logo.png" />
           </Heading>
           <VStack spacing={"7"}>
             {/* {LinkItems.map((link) => (
               <NavItem key={link.name} icon={link.icon} to={link.to} />
             ))} */}
-            <NavItem key={LinkItems[0].name} icon={LinkItems[0].icon} to={LinkItems[0].to} />
+            <NavItem
+              key={LinkItems[0].name}
+              icon={LinkItems[0].icon}
+              to={LinkItems[0].to}
+            />
             {user !== undefined ? (
-              <NavItem key={LinkItems[1].name} icon={LinkItems[1].icon} to={LinkItems[1].to} />
+              <NavItem
+                key={LinkItems[1].name}
+                icon={LinkItems[1].icon}
+                to={LinkItems[1].to}
+              />
             ) : (
               <></>
             )}
@@ -80,7 +94,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
           _hover={{
             boxShadow: "sm",
           }}
-          as='button'
+          as="button"
         >
           {user != undefined ? (
             <Img
@@ -97,24 +111,24 @@ const SidebarContent = ({ onClose, ...rest }) => {
             //   src={"https://bit.ly/broken-link"}
             //   // src={user.image_url}
             // />
-            <Avatar src='https://bit.ly/broken-link' />
+            <Avatar src="https://bit.ly/broken-link" />
           )}
         </Box>
       </Flex>
       <ProfileModal isOpen={isOpenProfile} onClose={onClosePrfile} />
     </>
-  )
-}
+  );
+};
 
 const NavItem = ({ icon, to }) => {
   return (
     <Link
       to={to}
-      w='full'
+      w="full"
       h={"50px"}
-      href='#'
+      href="#"
       style={{ textDecoration: "none" }}
-      cursor='pointer'
+      cursor="pointer"
       transition={".2s"}
       _focus={{ boxShadow: "none" }}
       _hover={{
@@ -122,7 +136,7 @@ const NavItem = ({ icon, to }) => {
         pl: "2px",
       }}
     >
-      <Center h={"full"}>{icon && <Icon fontSize='27px' as={icon} />}</Center>
+      <Center h={"full"}>{icon && <Icon fontSize="27px" as={icon} />}</Center>
     </Link>
-  )
-}
+  );
+};

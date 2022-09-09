@@ -11,7 +11,14 @@ export default function HomePage() {
       <Header>
         <Text fontSize={"2xl"} as="b"></Text>
       </Header>
-      <SimpleGrid columns={3} spacing={10} columnGap={2} px={20} py={10}>
+      <SimpleGrid
+        columns={{ base: 1, md: 3 }}
+        w={"full"}
+        spacing={10}
+        columnGap={2}
+        // px={20}
+        // py={10}
+      >
         {users.map((user) => {
           return (
             <Link to={`/timeline/${user.user_id}`} key={user.user_id}>
