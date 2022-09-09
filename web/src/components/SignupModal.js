@@ -60,7 +60,7 @@ function SignupModal({ isOpen, onClose }, props) {
       user_name: "",
       email: "",
       password: "",
-      isparent: undefined,
+      isParent: undefined,
       file: "",
       description: true,
     }),
@@ -79,7 +79,7 @@ function SignupModal({ isOpen, onClose }, props) {
     file: "",
     password: "",
     email: "",
-    isparent: "",
+    isParent: "",
     user_name: "",
   });
 
@@ -153,15 +153,15 @@ function SignupModal({ isOpen, onClose }, props) {
                     borderRadius={"3xl"}
                     transition={"all 0.5s"}
                     border={
-                      role.role_id === userData.isparent
+                      role.role_id === userData.isParent
                         ? "2px solid #ff99a8"
                         : "2px solid #e6e6e6"
                     }
-                    bg={role.role_id === userData.isparent ? "#ffe9e9" : ""}
+                    bg={role.role_id === userData.isParent ? "#ffe9e9" : ""}
                     onClick={() => {
                       setUserData((prev) => ({
                         ...prev,
-                        isparent: role.role_id,
+                        isParent: role.role_id,
                       }));
                     }}
                   >
