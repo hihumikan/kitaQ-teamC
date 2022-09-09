@@ -15,8 +15,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ChatBubble from "../components/ChatBubble";
 import ChatInput from "../components/ChatInput";
+import { useAuth } from "../context/AuthContext"
+
 
 export default function OnePostPage() {
+  const user = useAuth()
   const isChild = true;
   const chatListHeight = isChild === true ? "410px" : "550px";
   const { id } = useParams();
@@ -73,7 +76,7 @@ export default function OnePostPage() {
                     <ChatBubble key={comment.id} comment={comment} />
                   ))}
               </VStack>
-              {isChild === true ? (
+              {user !== undefined ? (
                 <ChatInput id={id} comment={comment} setComment={setComment} />
               ) : (
                 <></>

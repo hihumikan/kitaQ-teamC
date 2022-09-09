@@ -30,6 +30,8 @@ const AuthProvider = ({ children }) => {
   const [user, dispatch] = useReducer(authReducer, null)
   const [testUser, setTestUser] = useState()
 
+  // userのログインテストの時は、useEffectごとコメントアウトで切り替え
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     // const result = await axios.get("https://api.kitaq.qqey.net/login")
