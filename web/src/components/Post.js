@@ -4,7 +4,6 @@ import { BsChat } from "react-icons/bs"
 function Post({ post }) {
   return (
     <Box pos={"relative"}>
-      {console.log(post)}
       <Flex
         flexDirection={"column"}
         alignItems={"flex-start"}
