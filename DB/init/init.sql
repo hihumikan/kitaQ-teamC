@@ -56,10 +56,10 @@ INSERT INTO
         isParent
     ) VALUE(
         1,
-        'ほげほげ',
+        'ウホウホ',
         'hoge@hoge.com',
         '5f4dcc3b5aa765d61d8327deb882cf99',
-        'ユーザーの説明文です',
+        'うほおおおおー！！',
         0
     ), (
         2,
