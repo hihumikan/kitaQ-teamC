@@ -16,11 +16,6 @@ import { useAuth } from "../context/AuthContext"
 import { useEffect, useState } from "react"
 import ProfileModal from "./ProfileModal"
 
-const LinkItems = [
-  { name: "Home", icon: TbHome, to: "/" },
-  { name: "Settings", icon: TbBookmark, to: "/timeline" },
-]
-
 export default function Navbar({ children }) {
   return (
     <Box
@@ -41,6 +36,14 @@ export default function Navbar({ children }) {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const user = useAuth()
+  const LinkItems = [
+    { name: "Home", icon: TbHome, to: "/" },
+    {
+      name: "Settings",
+      icon: TbBookmark,
+      to: `/timeline/${user != undefined ? user.user_id : ""}`,
+    },
+  ]
   const { isOpen: isOpenProfile, onOpen: onOpenProfile, onClose: onClosePrfile } = useDisclosure()
   return (
     <>
@@ -59,31 +62,42 @@ const SidebarContent = ({ onClose, ...rest }) => {
             <Img src='/logo.png' />
           </Heading>
           <VStack spacing={"7"}>
-            {LinkItems.map((link) => (
+            {/* {LinkItems.map((link) => (
               <NavItem key={link.name} icon={link.icon} to={link.to} />
-            ))}
+            ))} */}
+            <NavItem key={LinkItems[0].name} icon={LinkItems[0].icon} to={LinkItems[0].to} />
+            {user !== undefined ? (
+              <NavItem key={LinkItems[1].name} icon={LinkItems[1].icon} to={LinkItems[1].to} />
+            ) : (
+              <></>
+            )}
           </VStack>
         </Box>
         <Box
-          as='button'
           borderRadius={"100px"}
           marginBottom={"60px"}
           boxShadow={"2xl"}
           _hover={{
             boxShadow: "sm",
           }}
-          onClick={onOpenProfile}
+          as='button'
         >
           {user != undefined ? (
             <Img
+              onClick={onOpenProfile}
               borderRadius={"100px"}
               width={"60px"}
               // src={"http://flat-icon-design.com/f/f_object_151/s256_f_object_151_0bg.png"}
-              // src={user === null ? user.image_url : ""}
-              src={user.data.user_data.image_url}
+              src={user.image_url}
             />
           ) : (
-            <></>
+            // <Img
+            //   borderRadius={"100px"}
+            //   width={"60px"}
+            //   src={"https://bit.ly/broken-link"}
+            //   // src={user.image_url}
+            // />
+            <Avatar src='https://bit.ly/broken-link' />
           )}
         </Box>
       </Flex>
