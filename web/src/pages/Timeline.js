@@ -9,8 +9,12 @@ import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { useAuth } from "../context/AuthContext"
 
 function Timeline() {
+  const user = useAuth()
+  const userName = user !== undefined ? user.user_name : ""
+  
   const { id } = useParams()
   const [posts, setPosts] = useState([])
   const [data, setData] = useState()
@@ -20,11 +24,13 @@ function Timeline() {
     const fetchData = async () => {
       const result = await axios.get(`https://api.kitaq.qqey.net/users/${id}`)
       setData(result.data)
+
       setPosts(result.data.posts)
-      console.log(data)
     }
     fetchData()
   }, [])
+
+  let resultUserName = data !== undefined ? data.user_name : ""
 
   return (
     <>
@@ -41,22 +47,27 @@ function Timeline() {
         </Header>
       </div>
       <div>
-        <Button
-          bg={"white"}
-          height='170px'
-          width='170px'
-          borderRadius={"60px"}
-          position={"fixed"}
-          marginLeft={"400px"}
-          marginTop={"400px"}
-          boxShadow={"xl"}
-          _hover={{ boxShadow: "sm" }}
-          onClick={onOpen}
-        >
-          <IconContext.Provider value={{ color: "#EFB6BF", size: "50px" }}>
-            <TbPencil />
-          </IconContext.Provider>
-        </Button>
+        {userName === resultUserName ? (
+          <Button
+            bg={"white"}
+            height='170px'
+            width='170px'
+            borderRadius={"60px"}
+            position={"fixed"}
+            marginLeft={"400px"}
+            marginTop={"400px"}
+            boxShadow={"xl"}
+            _hover={{ boxShadow: "sm" }}
+            onClick={onOpen}
+          >
+            <IconContext.Provider value={{ color: "#EFB6BF", size: "50px" }}>
+              <TbPencil />
+            </IconContext.Provider>
+          </Button>
+        ) : (
+          <></>
+        )}
+
         <VStack spacing={"75px"} mr={"45px"} mt={"80px"}>
           {posts.map((post) => (
             <Link
@@ -65,7 +76,7 @@ function Timeline() {
                 boxShadow: "lg",
                 opacity: "0.95",
               }}
-              to={`/onePostPage/${post.post_id }`}
+              to={`/onePostPage/${post.post_id}`}
               key={post.post_id}
             >
               <Post post={post} />
