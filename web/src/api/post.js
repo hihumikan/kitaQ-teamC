@@ -8,7 +8,9 @@ const postApi = {
     return result.data;
   },
   async post(post) {
-    const result = await axios.post(ENDPOINT_URL, post);
+    const result = await axios.post(ENDPOINT_URL, post, {
+      withCredentials: true,
+    });
     return result.data;
   },
   async delete(post) {

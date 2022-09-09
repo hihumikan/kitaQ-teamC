@@ -7,7 +7,8 @@ function ChatInput({ id, comment, setComment }) {
     // cf. `http://localhost:3001/posts/${id}/comments`
     const result = await axios.post(
       `https://api.kitaq.qqey.net/posts/${id}/comments`,
-      comment
+      comment,
+      { withCredentials: true }
     );
     return result.data;
   }
