@@ -60,19 +60,47 @@ INSERT INTO
         'hoge@hoge.com',
         '5f4dcc3b5aa765d61d8327deb882cf99',
         'ユーザーの説明文です',
+        0
+    ), (
+        2,
+        'ラーメン好き男',
+        'hoge2@hoge.com',
+        '5f4dcc3b5aa765d61d8327deb882cf99',
+        'ラーメンの汁は残す派',
+        1
+    ), (
+        3,
+        'ぴよぴよ',
+        'hoge3@hoge.com',
+        '5f4dcc3b5aa765d61d8327deb882cf99',
+        'ピヨピヨピヨピヨ',
+        0
+    ), (
+        4,
+        '田中太郎',
+        'hoge4@hoge.com',
+        '5f4dcc3b5aa765d61d8327deb882cf99',
+        '名前がexampleでよく使われます',
+        1
+    ), (
+        5,
+        'Edge信者',
+        'hoge5@hoge.com',
+        '5f4dcc3b5aa765d61d8327deb882cf99',
+        'Edgeしか使いません',
         1
     );
 
 INSERT INTO
-    posts (id, user_id, title, description) VALUE (
+    posts (id, user_id, title, description) VALUE (1, 1, '昼ごはん', '近くのラーメン屋美味かった'), (
+        2,
         1,
-        1,
-        '投稿のタイトル',
-        '投稿の説明文です。NULLはダメ'
+        '夜ご飯',
+        '今日は健康に気遣ってバナナを食べてから運動した'
     );
 
 INSERT INTO
-    comments (id, post_id, user_id, comment) VALUE (1, 1, 1, '投稿のコメントです');
+    comments (id, post_id, user_id, comment) VALUE (1, 1, 5, '健康に悪いぞ！'), (2, 1, 2, 'うまそう！'), (3, 2, 3, 'ピヨピヨピヨピヨ（私の色と一緒だ）');
 
 INSERT INTO
     session (user_id, session) VALUE (
