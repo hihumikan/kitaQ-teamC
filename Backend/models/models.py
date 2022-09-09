@@ -30,7 +30,7 @@ class Commons:
     def cookie_reg(self, user_id, session) -> str:
         conn = conn_db()  # ここでDBに接続
         cursor = conn.cursor()
-        sql = "INSERT INTO session (user_id,session) VALUES (%s,'%s') ON DUPLICATE KEY UPDATE session = VALUES(session);"
+        sql = "INSERT INTO session (user_id,session) VALUES (%s,%s) ON DUPLICATE KEY UPDATE session = VALUES(session);"
         print(sql)
         try:
             cursor.execute(sql, (user_id, session))
