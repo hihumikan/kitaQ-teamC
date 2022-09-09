@@ -4,6 +4,7 @@ from controller.posts import posts_bp
 from flask_cors import CORS
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 CORS(app, supports_credentials=True)
 app.register_blueprint(users_bp)
 app.register_blueprint(posts_bp)
