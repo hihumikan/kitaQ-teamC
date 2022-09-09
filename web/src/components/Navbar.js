@@ -16,11 +16,6 @@ import { useAuth } from "../context/AuthContext"
 import { useEffect, useState } from "react"
 import ProfileModal from "./ProfileModal"
 
-const LinkItems = [
-  { name: "Home", icon: TbHome, to: "/" },
-  { name: "Settings", icon: TbBookmark, to: "/timeline" },
-]
-
 export default function Navbar({ children }) {
   return (
     <Box
@@ -41,6 +36,14 @@ export default function Navbar({ children }) {
 
 const SidebarContent = ({ onClose, ...rest }) => {
   const user = useAuth()
+  const LinkItems = [
+    { name: "Home", icon: TbHome, to: "/" },
+    {
+      name: "Settings",
+      icon: TbBookmark,
+      to: `/timeline/${user != undefined ? user.user_id : ""}`,
+    },
+  ]
   const { isOpen: isOpenProfile, onOpen: onOpenProfile, onClose: onClosePrfile } = useDisclosure()
   return (
     <>
