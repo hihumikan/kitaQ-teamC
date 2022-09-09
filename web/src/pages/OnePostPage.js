@@ -25,7 +25,7 @@ export default function OnePostPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://localhost:3001/posts${id}`);
+      const result = await axios.get(`https://api.kitaq.qqey.net/posts/${id}`);
       setPost(result.data);
     };
     fetchData();
