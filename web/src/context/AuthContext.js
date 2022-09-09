@@ -32,11 +32,9 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("http://localhost:3001/login")
-      // axios.get("http://localhost:3001/login").then((res) => {
-      //   setTestUser(res)
-      // })
-      setTestUser(await axios.get("http://localhost:3001/login"))
+      const result = await axios.get("https://api.kitaq.qqey.net/login")
+      // const result = await axios.get("http://localhost:3001/login")
+      setTestUser(result.data.user_data)
       // dispatch({ type: "auth/login", user: result.data.user_data })
     }
     fetchData()
