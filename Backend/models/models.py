@@ -47,7 +47,7 @@ class Users:
     def user_reg(self, user_name, email, password, isParent, description):
         conn = conn_db()
         cursor = conn.cursor()
-        sql = "INSERT INTO users (user_name,email,password,description,isParent) VALUES('%s','%s','%s','%s',%s);"
+        sql = "INSERT INTO users (user_name,email,password,description,isParent) VALUES(%s,%s,%s,%s,%s);"
         print(sql)
         try:
             print(cursor.execute(
