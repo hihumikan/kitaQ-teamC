@@ -15,32 +15,28 @@ function Timeline() {
   const [posts, setPosts] = useState([])
   const [data, setData] = useState()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  let fetchData
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`https://api.kitaq.qqey.net/users/${id}`)
-      setData(result.data.image_url)
+      setData(result.data)
       setPosts(result.data.posts)
+      console.log(data)
     }
     fetchData()
   }, [])
 
   return (
     <>
-      {console.log(data)}
       <div style={{ position: "fixed" }}>
         <Header>
           <Center>
             <Avatar
               size='md'
               mr={"16px"}
-              src={fetchData !== undefined ? data : ""}
+              src={data !== undefined ? data.image_url : "https://bit.ly/broken-link"}
             />
-
-            <Text as='b' fontSize='3xl'>
-              加藤 恵吾
-            </Text>
+            {data !== undefined ? <Text fontSize='3xl'>{data.user_name}</Text> : <></>}
           </Center>
         </Header>
       </div>
@@ -69,7 +65,7 @@ function Timeline() {
                 boxShadow: "lg",
                 opacity: "0.95",
               }}
-              to={`/onePostPage/${post.post_id}`}
+              to={`/onePostPage/${post.post_id }`}
               key={post.post_id}
             >
               <Post post={post} />

@@ -57,7 +57,7 @@
 .balloon1:before {
   content: "";
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: -23px;
   margin-top: -12px;
   border: 12px solid transparent;
@@ -67,7 +67,7 @@
 .balloon1::after{
   content: "";
   position: absolute;
-  top: 20%;
+  top: 40%;
   left: -26px;
   margin-top: -13px;
   border: 13px solid transparent;
