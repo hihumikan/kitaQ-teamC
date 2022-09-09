@@ -60,7 +60,7 @@ INSERT INTO
         'hoge@hoge.com',
         '5f4dcc3b5aa765d61d8327deb882cf99',
         'ユーザーの説明文です',
-        1
+        0
     ), (
         2,
         'ラーメン好き男',
@@ -74,7 +74,7 @@ INSERT INTO
         'hoge3@hoge.com',
         '5f4dcc3b5aa765d61d8327deb882cf99',
         'ピヨピヨピヨピヨ',
-        1
+        0
     ), (
         4,
         '田中太郎',
