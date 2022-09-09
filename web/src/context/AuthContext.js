@@ -30,15 +30,15 @@ const AuthProvider = ({ children }) => {
   const [user, dispatch] = useReducer(authReducer, null)
   const [testUser, setTestUser] = useState()
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const result = await axios.get("https://api.kitaq.qqey.net/login")
-  //     const result = await axios.get("http://localhost:3001/login")
-  //     setTestUser(result.data.user_data)
-  //     // dispatch({ type: "auth/login", user: result.data.user_data })
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      // const result = await axios.get("https://api.kitaq.qqey.net/login")
+      const result = await axios.get("http://localhost:3001/login")
+      setTestUser(result.data.user_data)
+      // dispatch({ type: "auth/login", user: result.data.user_data })
+    }
+    fetchData()
+  }, [])
 
   // useEffect(() => {
   //   authApi.get().then((user) => {
