@@ -57,7 +57,7 @@ function CustomRadio({ icon, text, title, ...radioProps }) {
 function SignupModal({ isOpen, onClose }, props) {
   const defaultValue = useMemo(
     () => ({
-      username: "",
+      user_name: "",
       email: "",
       password: "",
       isparent: undefined,
@@ -80,7 +80,7 @@ function SignupModal({ isOpen, onClose }, props) {
     password: "",
     email: "",
     isparent: "",
-    username: "",
+    user_name: "",
   });
 
   const roles = [

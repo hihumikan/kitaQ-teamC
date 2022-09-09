@@ -172,7 +172,7 @@ function ProfileModal({ isOpen, onClose, userData, setUserData }) {
                 onChange={(e) => {
                   setUserData((prev) => ({
                     ...prev,
-                    username: e.target.value,
+                    user_name: e.target.value,
                   }));
                 }}
               />
