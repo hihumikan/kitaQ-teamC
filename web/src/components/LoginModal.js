@@ -73,7 +73,6 @@ function LoginModal({ isOpen, onClose }) {
               onClick={() => {
                 authApi.post({ email, password }).then((res) => {
                   dispatch({ type: "auth/login", user: res.data.user_data });
-                  // console.log(res);
                 });
                 setEmail("");
                 setPassword("");

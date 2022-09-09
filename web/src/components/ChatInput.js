@@ -6,7 +6,7 @@ function ChatInput({ id, comment, setComment }) {
   async function post(comment) {
     // cf. `http://localhost:3001/posts/${id}/comments`
     const result = await axios.post(
-      `http://localhost:3001/posts${id}comments`,
+      `https://api.kitaq.qqey.net/posts/${id}/comments`,
       comment
     );
     return result.data;

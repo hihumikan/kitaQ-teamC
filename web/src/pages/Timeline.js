@@ -24,7 +24,7 @@ function Timeline() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`http://localhost:3001/users${id}`);
+      const result = await axios.get(`https://api.kitaq.qqey.net/users/${id}`);
       setPosts(result.data.posts);
     };
     fetchData();

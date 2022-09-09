@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ENDPOINT_URL = "http://localhost:3001/signup";
+const ENDPOINT_URL = "https://api.kitaq.qqey.net/signup";
 
 const signupApi = {
   async getAll() {
